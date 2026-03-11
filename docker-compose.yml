@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: praxis-db
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: praxis_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - praxis_db_data:/var/lib/postgresql/data
+
+volumes:
+  praxis_db_data:
