@@ -1,0 +1,15 @@
+import { pgTable, text, timestamp, uniqueIndex, uuid } from "drizzle-orm/pg-core";
+import { clinics } from "./clinics";
+
+export const patients = pgTable("patients", {
+  id: uuid().primaryKey().defaultRandom(),
+  clinicId: uuid().references(() => clinics.id, { onDelete: 'cascade' }).notNull(),
+  fullName: text().notNull(),
+  email: text(),
+  phone: text(),
+  cpf: text(),
+  createdAt: timestamp().defaultNow().notNull(),
+  updatedAt: timestamp().defaultNow().notNull(),
+}, (table) => [
+  uniqueIndex("clinic_cpf_unique").on(table.clinicId, table.cpf)
+])

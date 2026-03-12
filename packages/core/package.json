@@ -1,0 +1,43 @@
+{
+  "name": "@praxis/core",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./domain": {
+      "types": "./dist/domain/index.d.ts",
+      "import": "./dist/domain/index.mjs",
+      "require": "./dist/domain/index.js"
+    },
+    "./infra": {
+      "types": "./dist/infra/index.d.ts",
+      "import": "./dist/infra/index.mjs",
+      "require": "./dist/infra/index.js"
+    }
+  },
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "db:generate": "drizzle-kit generate",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
+    "db:seed": "tsx ./src/db/seed.ts"
+  },
+  "dependencies": {
+    "drizzle-orm": "latest",
+    "postgres": "latest",
+    "zod": "latest",
+    "drizzle-zod": "latest"
+  },
+  "devDependencies": {
+    "@praxis/typescript-config": "workspace:*",
+    "drizzle-kit": "latest",
+    "drizzle-seed": "^0.3.1",
+    "tsup": "latest",
+    "tsx": "latest",
+    "typescript": "latest"
+  }
+}
