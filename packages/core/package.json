@@ -7,17 +7,15 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "exports": {
-    "./domain": {
-      "types": "./dist/domain/index.d.ts",
-      "import": "./dist/domain/index.mjs",
-      "require": "./dist/domain/index.js"
-    },
-    "./infra": {
-      "types": "./dist/infra/index.d.ts",
-      "import": "./dist/infra/index.mjs",
-      "require": "./dist/infra/index.js"
-    }
+  "./domain": {
+    "types": "./src/domain/index.ts",
+    "default": "./src/domain/index.ts"
   },
+  "./infra": {
+    "types": "./src/infra/index.ts",
+    "default": "./src/infra/index.ts"
+  }
+},
   "scripts": {
     "dev": "tsup --watch",
     "build": "tsup",
