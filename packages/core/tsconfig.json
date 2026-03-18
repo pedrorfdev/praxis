@@ -3,7 +3,11 @@
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "./src",
-    "baseUrl": "."
+    "baseUrl": ".",
+    "declaration": true,      
+    "declarationMap": true,
+    "composite": false
   },
-  "include": ["src/**/*.ts", "src/infra/db/seed.ts"]
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }

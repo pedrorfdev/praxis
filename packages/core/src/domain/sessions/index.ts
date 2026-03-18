@@ -5,8 +5,8 @@ export const sessionSchema = z.object({
   clinicId: z.uuid(),
   patientId: z.uuid(),
   scheduledAt: z.date(),
-  content: z.string().nullable().optional(),
-  status: z.enum(["scheduled", "completed", "cancelled"]),
+  content: z.string().optional().default(""),
+  status: z.enum(["scheduled", "completed", "cancelled"]).default("scheduled"),
   createdAt: z.date(),
   updatedAt: z.date(),
 });
@@ -16,9 +16,7 @@ export const createSessionSchema = sessionSchema.omit({
   createdAt: true,
   updatedAt: true,
 }).extend({
-  scheduledAt: z.date().refine(date => date >= new Date(), {
-    message: "A sessão não pode ser agendada para o passado",
-  }),
+  scheduledAt: z.coerce.date({ message: "Data de agendamento inválida" }),
 });
 
 export const updateSessionSchema = createSessionSchema.partial();

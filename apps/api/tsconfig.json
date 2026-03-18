@@ -9,6 +9,7 @@
     "target": "ES2021",
     "sourceMap": true,
     "outDir": "./dist",
+    "rootDir": "../../",
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
@@ -18,16 +19,17 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@praxis/core/domain": [
-        "../../packages/core/src/domain/index"
+      "@praxis/core": [
+        "../../packages/core/dist"
       ],
-      "@praxis/core/infra": [
-        "../../packages/core/src/infra/index"
+      "@praxis/core/*": [
+        "../../packages/core/dist/*"
       ]
     }
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "../../packages/core/src/**/*"
   ],
   "exclude": [
     "node_modules",

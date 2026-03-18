@@ -20,8 +20,10 @@ export const patientSchema = z.object({
     .min(3, "O nome do paciente deve ter no mínimo 3 caracteres")
     .max(120, "Nome muito longo"),
   cpf: z.string()
-    .transform(v => v.replace(/\D/g, ''))
-    .refine(validateCPF, { message: "CPF inválido" }),
+    .transform(v => v?.replace(/\D/g, ''))
+    .refine(v => !v || validateCPF(v), { message: "CPF inválido" })
+    .nullable()
+    .optional(),
   email: z.email("E-mail inválido").nullable().optional(),
   phone: z.string().min(10, "Telefone incompleto").nullable().optional(),
   

@@ -1,0 +1,39 @@
+
+
+> @praxis/core@0.0.1 build /home/pedro/dev/praxis/packages/core
+> tsup src/index.ts src/domain/index.ts src/infra/index.ts --format cjs,esm --dts --clean
+
+[34mCLI[39m Building entry: src/index.ts, src/domain/index.ts, src/infra/index.ts
+[34mCLI[39m Using tsconfig: tsconfig.json
+[34mCLI[39m tsup v8.5.1
+[34mCLI[39m Using tsup config: /home/pedro/dev/praxis/packages/core/tsup.config.ts
+[34mCLI[39m Target: es2022
+[34mCLI[39m Cleaning output folder
+[34mCJS[39m Build start
+[34mESM[39m Build start
+[32mCJS[39m [1mdist/index.cjs            [22m[32m7.41 KB[39m
+[32mCJS[39m [1mdist/domain/index.cjs     [22m[32m4.30 KB[39m
+[32mCJS[39m [1mdist/infra/index.cjs      [22m[32m4.15 KB[39m
+[32mCJS[39m [1mdist/index.cjs.map        [22m[32m9.40 KB[39m
+[32mCJS[39m [1mdist/domain/index.cjs.map [22m[32m5.49 KB[39m
+[32mCJS[39m [1mdist/infra/index.cjs.map  [22m[32m4.22 KB[39m
+[32mCJS[39m ⚡️ Build success in 54ms
+[32mESM[39m [1mdist/domain/index.js       [22m[32m455.00 B[39m
+[32mESM[39m [1mdist/index.js              [22m[32m550.00 B[39m
+[32mESM[39m [1mdist/infra/index.js        [22m[32m141.00 B[39m
+[32mESM[39m [1mdist/chunk-DV7ERADX.js     [22m[32m2.13 KB[39m
+[32mESM[39m [1mdist/chunk-ZDEIGCT5.js     [22m[32m2.64 KB[39m
+[32mESM[39m [1mdist/domain/index.js.map   [22m[32m71.00 B[39m
+[32mESM[39m [1mdist/index.js.map          [22m[32m71.00 B[39m
+[32mESM[39m [1mdist/chunk-DV7ERADX.js.map [22m[32m4.19 KB[39m
+[32mESM[39m [1mdist/infra/index.js.map    [22m[32m71.00 B[39m
+[32mESM[39m [1mdist/chunk-ZDEIGCT5.js.map [22m[32m5.29 KB[39m
+[32mESM[39m ⚡️ Build success in 55ms
+DTS Build start
+DTS ⚡️ Build success in 6494ms
+DTS dist/index.d.cts        479.00 B
+DTS dist/domain/index.d.cts 3.32 KB
+DTS dist/infra/index.d.cts  27.33 KB
+DTS dist/index.d.ts         477.00 B
+DTS dist/domain/index.d.ts  3.32 KB
+DTS dist/infra/index.d.ts   27.33 KB
