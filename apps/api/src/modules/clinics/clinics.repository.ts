@@ -8,7 +8,7 @@ export class ClinicsRepository {
   constructor(
   ) {}
 
-  async create(data: CreateClinicInput) {
+  async create(data: CreateClinicInput & { slug: string}) {
     const [result] = await db
       .insert(schema.clinics)
       .values(data)

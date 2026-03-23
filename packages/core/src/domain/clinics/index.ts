@@ -17,6 +17,7 @@ export const clinicSchema = z.object({
 
 export const createClinicSchema = clinicSchema.omit({
   id: true,
+  slug: true,
   createdAt: true,
   updatedAt: true,
 });

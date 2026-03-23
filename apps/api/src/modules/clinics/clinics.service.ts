@@ -12,7 +12,8 @@ import * as bcrypt from 'bcryptjs';
 export class ClinicsService {
   constructor(
     @Inject(ClinicsRepository)
-    private readonly repository: ClinicsRepository) {}
+    private readonly repository: ClinicsRepository,
+  ) {}
 
   async create(data: CreateClinicInput) {
     const existing = await this.repository.findByEmail(data.email);
@@ -24,9 +25,11 @@ export class ClinicsService {
     const hashedPassword = await bcrypt.hash(data.password, salt);
 
     const slug = data.name
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
       .toLowerCase()
       .trim()
-      .replace(/[^\w\s-]/g, '')
+      .replace(/[^a-z0-9\s-]/g, '')
       .replace(/[\s_-]+/g, '-')
       .replace(/^-+|-+$/g, '');
 
