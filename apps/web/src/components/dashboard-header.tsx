@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
-import { Moon, Sun } from "lucide-react"
-import { SidebarTrigger } from "@/components/ui/sidebar"
-import { useTheme } from 'next-themes'
+import { Moon, Sun } from "lucide-react";
+import { SidebarTrigger } from "@/components/ui/sidebar";
+import { useTheme } from "next-themes";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -18,18 +18,20 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import { Separator } from "@/components/ui/separator"
+} from "@/components/ui/breadcrumb";
+import { Separator } from "@/components/ui/separator";
+import { toast } from "sonner";
+import { NewPatientDialog } from "./new-patient-dialog";
 
 export function DashboardHeader() {
-  const { setTheme } = useTheme()
+  const { setTheme } = useTheme();
 
   return (
     <header className="flex h-16 shrink-0 items-center gap-2 border-b border-border/40 px-4 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
       <div className="flex items-center gap-2">
         <SidebarTrigger className="-ml-1 cursor-pointer" />
         <Separator orientation="vertical" className="mr-2 h-4" />
-        
+
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem className="hidden md:block">
@@ -43,7 +45,10 @@ export function DashboardHeader() {
         </Breadcrumb>
       </div>
 
-      <div className="ml-auto flex items-center gap-2">
+      <div className="ml-auto flex items-center gap-4">
+        <NewPatientDialog />
+        <Separator orientation="vertical" className="h-6" />
+
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="h-9 w-9">
@@ -53,18 +58,33 @@ export function DashboardHeader() {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={() => setTheme("light")}>
+            <DropdownMenuItem
+              onClick={() => {
+                setTheme("light");
+                toast.success("Modo Petroleum ativado!");
+              }}
+            >
               Light (Petroleum)
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setTheme("dark")}>
+            <DropdownMenuItem
+              onClick={() => {
+                setTheme("dark");
+                toast.success("Modo Onyx ativado")
+              }}
+            >
               Dark (Onyx)
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setTheme("system")}>
+            <DropdownMenuItem
+              onClick={() => {
+                setTheme("system");
+                toast.success("Modo do sistema ativado!");
+              }}
+            >
               Sistema
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
     </header>
-  )
+  );
 }

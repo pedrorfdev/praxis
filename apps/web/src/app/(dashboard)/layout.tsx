@@ -7,6 +7,7 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import { ThemeProvider } from "next-themes";
 import { DashboardHeader } from "@/components/dashboard-header";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-sans",
@@ -55,6 +56,7 @@ export default function RootLayout({
               </SidebarProvider>
             </TooltipProvider>
           </QueryProvider>
+          <Toaster position="bottom-right" expand={true} richColors />
         </ThemeProvider>
       </body>
     </html>
