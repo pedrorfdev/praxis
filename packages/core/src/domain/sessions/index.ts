@@ -4,9 +4,14 @@ export const sessionSchema = z.object({
   id: z.uuid(),
   clinicId: z.uuid(),
   patientId: z.uuid(),
-  scheduledAt: z.date(),
-  content: z.string().optional().default(''),
-  status: z.enum(['scheduled', 'completed', 'cancelled']).default('scheduled'),
+  startAt: z.date(),
+  durationInMinutes: z.number().int().default(60),
+  content: z.string().optional().nullable().default(''),
+  status: z.enum(['in_progress', 'completed']).default('in_progress'),
+
+  billingType: z.enum(['PRIVATE', 'SUBSIDIZED'], {
+    error: "Selecione o tipo de cobrança"
+  }).default('PRIVATE'),
   createdAt: z.date(),
   updatedAt: z.date(),
 })
@@ -18,7 +23,8 @@ export const createSessionSchema = sessionSchema
     updatedAt: true,
   })
   .extend({
-    scheduledAt: z.coerce.date({ message: 'Data de agendamento inválida' }),
+    startAt: z.coerce.date({ message: 'Horário de início inválido' }).default(() => new Date()),
+    content: z.string().optional().nullable()
   })
 
 export const updateSessionSchema = createSessionSchema.partial()

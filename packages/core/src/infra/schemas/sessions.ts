@@ -1,12 +1,16 @@
 import { relations } from 'drizzle-orm'
-import { pgEnum, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core'
+import { pgEnum, pgTable, text, timestamp, uuid, integer } from 'drizzle-orm/pg-core'
 import { clinics } from './clinics'
 import { patients } from './patients'
 
 export const sessionStatusEnum = pgEnum('session_status', [
-  'scheduled',
+  'in_progress',
   'completed',
-  'cancelled',
+])
+
+export const billingTypeEnum = pgEnum('billing_type', [
+  'PRIVATE',
+  'SUBSIDIZED'
 ])
 
 export const sessions = pgTable('sessions', {
@@ -17,9 +21,17 @@ export const sessions = pgTable('sessions', {
   patientId: uuid()
     .references(() => patients.id, { onDelete: 'cascade' })
     .notNull(),
-  scheduledAt: timestamp().notNull(),
+  
+  startAt: timestamp().defaultNow().notNull(),
+  
+  durationInMinutes: integer().default(60).notNull(),
+  
+  billingType: billingTypeEnum().default('PRIVATE').notNull(),
+  
   content: text(),
-  status: sessionStatusEnum().default('scheduled').notNull(),
+  
+  status: sessionStatusEnum().default('in_progress').notNull(),
+  
   createdAt: timestamp().defaultNow().notNull(),
   updatedAt: timestamp().defaultNow().notNull(),
 })

@@ -15,6 +15,13 @@
       "when": 1774914677887,
       "tag": "0001_smart_sebastian_shaw",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1774922436308,
+      "tag": "0002_pink_rhodey",
+      "breakpoints": true
     }
   ]
 }
