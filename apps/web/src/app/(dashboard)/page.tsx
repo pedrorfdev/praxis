@@ -22,7 +22,7 @@ export default function DashboardPage() {
           <Goal />
         </div>
 
-        <Card className="col-span-3 border-border/50">
+        {/* <Card className="col-span-3 border-border/50">
           <CardHeader>
             <CardTitle>Agenda de Hoje</CardTitle>
             <CardDescription>Visualização rápida dos seus próximos horários.</CardDescription>
@@ -30,7 +30,7 @@ export default function DashboardPage() {
           <CardContent>
             <UpcomingSessions />
           </CardContent>
-        </Card>
+        </Card> */}
       </div>
     </div>
   )

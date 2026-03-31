@@ -84,13 +84,13 @@ export function DashboardHeader() {
       </div>
 
       <div className="ml-auto flex items-center gap-4">
-        {pathname.includes('/pacientes') ? (
+      {/*   {pathname.includes('/pacientes') ? (
            <NewPatientDialog />
         ) : pathname.includes('/agenda') ? (
           <Button className="bg-secondary text-secondary-foreground hover:bg-secondary/90 rounded-xl font-bold shadow-lg shadow-secondary/10">
-            Novo Agendamento
+            Novo Atendimento
           </Button>
-        ) : null}
+        ) : null} */}
         
         <Separator orientation="vertical" className="h-6 opacity-40" />
 

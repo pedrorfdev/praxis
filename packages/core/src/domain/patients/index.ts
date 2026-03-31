@@ -31,12 +31,11 @@ export const patientSchema = z.object({
   birthDate: z.coerce.date({
     error: "Data de nascimento é obrigatória"
   }),
-  gender: z.string().nullable().optional(),
+  gender: z.string().min(1, "Esse campo é obrigatório"),
   phone: z.string().min(10, "Telefone incompleto").nullable().optional(),
-  email: z.email("E-mail inválido").nullable().optional(),
   
-  address: z.string().nullable().optional(),
-  city: z.string().nullable().optional(),
+  address: z.string().min(5, "Endereço muito curto"),
+  city: z.string().min(2, "Cidade muito curta"),
 
   responsibleName: z
     .string()
@@ -56,37 +55,59 @@ export const patientSchema = z.object({
     .nullable()
     .optional(),
 
-  birthPlace: z.string().nullable().optional(),
-  maritalStatus: z.string().nullable().optional(),
-  educationLevel: z.string().nullable().optional(),
-  profession: z.string().nullable().optional(),
-  religion: z.string().nullable().optional(),
-  diagnosis: z.string().nullable().optional(),
+  birthPlace: z.string().min(1, "Esse campo é obrigatório"),
+  maritalStatus: z.string().min(1, "Esse campo é obrigatório"),
+  educationLevel: z.string().min(1, "Esse campo é obrigatório"),
+  profession: z.string().min(1, "Esse campo é obrigatório"),
+  religion: z.string().min(1, "Esse campo é obrigatório"),
+  diagnosis: z.string().optional().nullable(),
 
   createdAt: z.date(),
   updatedAt: z.date(),
 });
 
-export const createPatientSchema = patientSchema
-  .omit({
-    id: true,
-    createdAt: true,
-    updatedAt: true,
-  })
-  .refine(
-    (data) => {
-      if (data.type === "CHILD") {
-        return !!data.responsibleName && !!data.responsiblePhone;
-      }
-      return true;
-    },
-    {
-      message: "Nome e telefone do responsável são obrigatórios para crianças",
-      path: ["responsibleName"],
-    },
-  );
 
-export const updatePatientSchema = createPatientSchema.partial();
+const basePatientSchema = patientSchema.omit({ 
+  id: true,
+  clinicId: true,
+  createdAt: true, 
+  updatedAt: true 
+});
+
+  export const createPatientSchema = basePatientSchema
+  .superRefine((data, ctx) => {
+    if (data.type === 'CHILD') {
+      if (!data.responsibleName || data.responsibleName.length < 3) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Nome do responsável é obrigatório para crianças",
+          path: ["responsibleName"],
+        });
+      }
+      if (!data.responsiblePhone || data.responsiblePhone.length < 10) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Telefone do responsável é obrigatório",
+          path: ["responsiblePhone"],
+        });
+      }
+    }
+
+    if (data.type === 'ADULT') {
+      const fields = ['profession', 'maritalStatus', 'educationLevel', 'cpf'] as const;
+      fields.forEach((field) => {
+        if (!data[field] || data[field]!.length < 1) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: "Este campo é obrigatório para adultos",
+            path: [field],
+          });
+        }
+      });
+    }
+  });
+
+export const updatePatientSchema = basePatientSchema.partial();
 
 export type Patient = z.infer<typeof patientSchema>;
 export type CreatePatientInput = z.infer<typeof createPatientSchema>;
