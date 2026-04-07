@@ -1,0 +1,29 @@
+"use client";
+import { useFormContext } from "react-hook-form";
+
+export function SocialInteraction() {
+  const { register } = useFormContext();
+
+  return (
+    <div className="space-y-6">
+      <div className="grid grid-cols-1 gap-6">
+        <div className="space-y-3">
+          <label className="text-[10px] font-black uppercase tracking-widest text-secondary/70">Forma de comunicação predominante</label>
+          <textarea {...register("social.communication_type")} placeholder="Fala frases? Usa gestos? Aponta? Chora para pedir?" className="w-full bg-[#0A0C10]/40 border border-white/5 rounded-2xl p-4 text-zinc-200 outline-none focus:border-secondary/40" />
+        </div>
+
+        <div className="space-y-3">
+          <label className="text-[10px] font-black uppercase tracking-widest text-secondary/70">Contato Visual</label>
+          <div className="flex gap-4">
+            {["Sustenta", "Pouco", "Ausente", "Inconsistente"].map((op) => (
+              <label key={op} className="flex-1">
+                <input type="radio" {...register("social.eye_contact")} value={op.toLowerCase()} className="peer sr-only" />
+                <div className="cursor-pointer text-center p-3 rounded-xl border border-white/5 bg-white/[0.02] text-[10px] font-bold peer-checked:border-secondary/50 peer-checked:bg-secondary/10 peer-checked:text-secondary transition-all">{op}</div>
+              </label>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

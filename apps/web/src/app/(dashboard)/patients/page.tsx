@@ -165,7 +165,7 @@ function PatientCard({ patient }: { patient: any }) {
 
   return (
     <Card
-      onClick={() => router.push(`/pacientes/${patient.id}`)}
+      onClick={() => router.push(`/patients/${patient.id}`)}
       className="group border border-border/40 bg-card hover:border-primary/50 hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden relative"
     >
       <div
@@ -184,7 +184,7 @@ function PatientCard({ patient }: { patient: any }) {
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="rounded-xl w-40">
             <DropdownMenuItem
-              onClick={() => router.push(`/pacientes/${patient.id}`)}
+              onClick={() => router.push(`/patients/${patient.id}`)}
             >
               <Eye className="w-4 h-4 mr-2" /> Detalhes
             </DropdownMenuItem>
@@ -216,7 +216,7 @@ function PatientCard({ patient }: { patient: any }) {
 
       <CardContent className="space-y-4">
         <div className="flex items-center justify-between text-xs text-muted-foreground">
-          <span>Última Sessão</span>
+          <span>Última Evolução</span>
           <span className="font-medium text-foreground">
             {patient.lastSession}
           </span>
@@ -292,7 +292,7 @@ function PatientList({ patients }: { patients: any[] }) {
                   <Button
                     variant="ghost"
                     size="icon"
-                    onClick={() => router.push(`/pacientes/${patient.id}`)}
+                    onClick={() => router.push(`/patients/${patient.id}`)}
                     title="Ver Detalhes"
                   >
                     <Eye className="h-4 w-4 text-muted-foreground hover:text-primary" />

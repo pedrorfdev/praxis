@@ -27,9 +27,9 @@ import Link from "next/link"
 
 const items = [
   { title: "Dashboard", url: "/", icon: LayoutDashboard },
-  { title: "Pacientes", url: "/pacientes", icon: Users },
-  { title: "Prontuários", url: "/prontuarios", icon: ClipboardList },
-  { title: "Configurações", url: "/config", icon: Settings },
+  { title: "Pacientes", url: "/patients", icon: Users },
+  { title: "Prontuários", url: "/activity", icon: ClipboardList },
+  { title: "Configurações", url: "/settings", icon: Settings },
 ]
 
 export function AppSidebar() {

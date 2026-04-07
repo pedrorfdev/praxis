@@ -1,38 +1,113 @@
 "use client";
 
 import { useFormContext } from "react-hook-form";
-import { PatientMiniHeader } from "./_components/patient-mini-header";
+import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight, Save } from "lucide-react";
+import { MainComplaint } from "./_components/segments/main-complaint";
+import { GestationalHistory } from "./_components/segments/gestational-history";
+import { NeonatalHistory } from "./_components/segments/neonatal-history";
+import {
+  ANAMNESIS_STEPS,
+  useAnamnesis,
+} from "./_components/anamnesis-provider";
+import { NeuroDevelopment } from "./_components/segments/neuro-development";
+import { SocialInteraction } from "./_components/segments/social-interaction";
+import { DiagnosisHistory } from "./_components/segments/diagnosis-history";
+import { DailyRoutine } from "./_components/segments/daily-routine";
+import { FamilyContext } from "./_components/segments/family-context";
+import { FamilyExpectations } from "./_components/segments/family-expectations";
+import { BehaviorRegulation } from "./_components/segments/behavior-regulation";
 
 export default function AnamnesisPage() {
+  const { currentStep, nextStep, prevStep, isLastStep } = useAnamnesis();
   const { handleSubmit } = useFormContext();
 
-  const onSubmit = (data: any) => {
-    console.log("Dados prontos para o Banco:", data);
+  const onFinalSubmit = (data: any) => {
+    const sanitize = (obj: any): any => {
+      return Object.keys(obj).reduce((acc: any, key) => {
+        const value = obj[key];
+        if (typeof value === "object" && value !== null) {
+          acc[key] = sanitize(value);
+        } else {
+          acc[key] =
+            value === "" || value === undefined || value === null
+              ? "Não informado"
+              : value;
+        }
+        return acc;
+      }, {});
+    };
+
+    const cleanData = sanitize(data);
+    console.log("Dados Prontos para o Backend:", cleanData);
+    alert("Anamnese finalizada com sucesso!");
+  };
+
+  const renderSegment = () => {
+    switch (currentStep) {
+      case "queixa-principal":
+        return <MainComplaint />;
+      case "historico-gestacional":
+        return <GestationalHistory />;
+      case "historico-neonatal":
+        return <NeonatalHistory />;
+      case "desenvolvimento-neuro":
+        return <NeuroDevelopment />;
+      case "desenvolvimento-linguagem":
+        return <SocialInteraction />;
+      case "historico-medico":
+        return <DiagnosisHistory />;
+      case "comportamento-social":
+        return <BehaviorRegulation />;
+      case "alimentacao-sono":
+        return <DailyRoutine />;
+      case "historico-familiar":
+        return <FamilyContext />;
+      case "escolaridade":
+        return <DailyRoutine />;
+      case "expectativas":
+        return <FamilyExpectations />;
+      default:
+        return <MainComplaint />;
+    }
   };
 
   return (
-    <>
-      <PatientMiniHeader />
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="space-y-12 pb-20"
-      >
-        <div className="bg-secondary/5 border border-secondary/20 p-6 rounded-[2rem] mb-8">
-          <h1 className="text-2xl font-bold text-primary">
-            Anamnese Clínica
-          </h1>
-          <p className="text-sm text-muted-foreground mt-1 font-medium">
-            Preencha os marcos do desenvolvimento do paciente. Os dados são
-            salvos automaticamente no seu navegador.
-          </p>
-        </div>
+    <div className="flex flex-col min-h-[600px] justify-between">
+      <div className="flex-1">{renderSegment()}</div>
 
-        <div className="text-center py-24 border-2 border-dashed border-border/30 rounded-[3rem] bg-card/20">
-          <p className="text-muted-foreground font-medium italic">
-            Selecione um tópico ao lado para iniciar o preenchimento.
-          </p>
-        </div>
-      </form>
-    </>
+      <div className="mt-12 pt-6 border-t border-white/5 flex items-center justify-between">
+        <Button
+          type="button"
+          variant="ghost"
+          onClick={prevStep}
+          disabled={currentStep === ANAMNESIS_STEPS[0]}
+          className="text-muted-foreground hover:text-primary transition-colors"
+        >
+          <ChevronLeft className="w-4 h-4 mr-2" />
+          Voltar
+        </Button>
+
+        {!isLastStep ? (
+          <Button
+            type="button"
+            onClick={nextStep}
+            className="bg-secondary text-secondary-foreground font-bold px-8 rounded-xl hover:scale-105 transition-all"
+          >
+            Próximo Passo
+            <ChevronRight className="w-4 h-4 ml-2" />
+          </Button>
+        ) : (
+          <Button
+            type="button"
+            onClick={handleSubmit(onFinalSubmit)}
+            className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-8 rounded-xl hover:scale-105 transition-all"
+          >
+            <Save className="w-4 h-4 mr-2" />
+            Finalizar Anamnese
+          </Button>
+        )}
+      </div>
+    </div>
   );
 }
