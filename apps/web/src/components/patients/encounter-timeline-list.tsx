@@ -48,7 +48,7 @@ export function EncounterTimelineList() {
                   </span>
                 </div>
                 
-                <Button variant="ghost" size="icon" className="h-10 w-10 rounded-2xl shrink-0 hover:bg-secondary/10 hover:text-secondary text-muted-foreground transition-all">
+                <Button variant="ghost" size="icon" className="h-10 w-10 rounded-2xl shrink-0 hover:bg-secondary/10 hover:text-secondary text-muted-foreground  transition-all">
                   <MoreVertical className="h-5 w-5" />
                 </Button>
               </div>
