@@ -2,9 +2,16 @@
 
 import { useState, useEffect, useMemo } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { 
-  Save, ArrowLeft, CheckCircle2, Loader2, 
-  Info, Clock8, Timer, Banknote, AlertCircle 
+import {
+  Save,
+  ArrowLeft,
+  CheckCircle2,
+  Loader2,
+  Info,
+  Clock8,
+  Timer,
+  Banknote,
+  AlertCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -27,6 +34,24 @@ import { EditorMenuBar } from "@/components/editor-menu-bar";
 import { PatientSelector } from "@/components/patients-selector";
 import { NumericFormat } from "react-number-format";
 import { format, addMinutes, parse } from "date-fns";
+import { cn } from "@/lib/utils";
+
+const CustomTextStyle = TextStyle.extend({
+  addAttributes() {
+    return {
+      ...this.parent?.(),
+      fontSize: {
+        default: null,
+        parseHTML: element => element.style.fontSize,
+        renderHTML: attributes => {
+          if (!attributes.fontSize) return {};
+          return { style: `font-size: ${attributes.fontSize}` };
+        },
+      },
+    };
+  },
+});
+
 
 export default function NewSessionPage() {
   const searchParams = useSearchParams();
@@ -34,21 +59,20 @@ export default function NewSessionPage() {
   const queryClient = useQueryClient();
   const patientIdFromUrl = searchParams.get("patientId");
 
-  // States
-  const [selectedPatient, setSelectedPatient] = useState<string | null>(patientIdFromUrl);
+  const [selectedPatient, setSelectedPatient] = useState<string | null>(
+    patientIdFromUrl,
+  );
   const [startTime, setStartTime] = useState("");
   const [duration, setDuration] = useState("60");
   const [sessionValue, setSessionValue] = useState("");
 
   const STORAGE_KEY = `praxis-draft-${selectedPatient || "new-session"}`;
 
-  // 1. Inicialização Forçada em 24h (HH:mm)
   useEffect(() => {
     const now = new Date();
     setStartTime(format(now, "HH:mm"));
   }, []);
 
-  // 2. Cálculo de Término Robusto (HH:mm)
   const endTime = useMemo(() => {
     if (!startTime) return "--:--";
     try {
@@ -63,21 +87,36 @@ export default function NewSessionPage() {
   const editor = useEditor({
     extensions: [
       StarterKit,
-      TextStyle,
+      CustomTextStyle,
       Color,
       Placeholder.configure({
         placeholder: "Comece a descrever a evolução...",
-      })
+      }),
     ],
     immediatelyRender: false,
     editorProps: {
       attributes: {
-        class: "prose prose-slate prose-xl focus:outline-none min-h-[650px] max-w-full p-12 rounded-b-3xl border border-border/40 shadow-inner bg-card text-foreground/90 leading-relaxed",
+        class:
+          cn(
+        "prose prose-slate max-w-full focus:outline-none min-h-[650px] p-12 rounded-b-3xl border border-border/40 shadow-inner bg-card leading-relaxed",
+        "text-zinc-200 prose-headings:text-secondary prose-p:text-zinc-300 prose-strong:text-white",
+      ),
       },
     },
     onUpdate: ({ editor }) => {
       localStorage.setItem(STORAGE_KEY, editor.getHTML());
     },
+    onSelectionUpdate: () => {},
+    content: `
+      <h2>Objetivo da Sessão</h2>
+      <p></p>
+      <h2>Desenvolvimento / Atividades</h2>
+      <p></p>
+      <h2>Comportamento e Regulação</h2>
+      <p></p>
+      <h2>Orientação à Família / Próximos Passos</h2>
+      <p></p>
+    `,
   });
 
   useEffect(() => {
@@ -98,7 +137,9 @@ export default function NewSessionPage() {
     onSuccess: () => {
       toast.success("Atendimento salvo com sucesso!");
       localStorage.removeItem(STORAGE_KEY);
-      queryClient.invalidateQueries({ queryKey: ["sessions", selectedPatient] });
+      queryClient.invalidateQueries({
+        queryKey: ["sessions", selectedPatient],
+      });
       router.back();
     },
     onError: () => toast.error("Erro ao tentar salvar o atendimento."),
@@ -108,9 +149,10 @@ export default function NewSessionPage() {
     if (!selectedPatient) return toast.error("Selecione um paciente primeiro.");
     const val = parseFloat(sessionValue);
     if (isNaN(val) || val < 1) return toast.error("O valor mínimo é R$ 1,00.");
-    
+
     const content = editor?.getHTML();
-    if (!content || content === "<p></p>") return toast.error("O conteúdo não pode ser vazio.");
+    if (!content || content === "<p></p>")
+      return toast.error("O conteúdo não pode ser vazio.");
 
     saveSession({
       patientId: selectedPatient,
@@ -129,12 +171,21 @@ export default function NewSessionPage() {
     <div className="w-full mx-auto space-y-6 pb-20 px-8 animate-in fade-in duration-700">
       <header className="flex items-center justify-between sticky top-0 z-20 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-5 border-b border-border/20">
         <div className="flex items-center gap-4">
-          <Button variant="ghost" size="icon" onClick={() => router.back()} className="rounded-full">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => router.back()}
+            className="rounded-full"
+          >
             <ArrowLeft className="h-5 w-5" />
           </Button>
           <div>
-            <h1 className="text-2xl font-bold text-primary tracking-tight italic">Atendimento Clínico</h1>
-            <p className="text-[10px] text-muted-foreground uppercase font-black tracking-[0.2em]">Evolução do Prontuário</p>
+            <h1 className="text-2xl font-bold text-primary tracking-tight italic">
+              Atendimento Clínico
+            </h1>
+            <p className="text-[10px] text-muted-foreground uppercase font-black tracking-[0.2em]">
+              Evolução do Prontuário
+            </p>
           </div>
         </div>
 
@@ -143,7 +194,11 @@ export default function NewSessionPage() {
           disabled={isPending}
           className="bg-secondary text-secondary-foreground px-10 h-12 rounded-xl font-bold shadow-lg shadow-secondary/20 hover:scale-[1.02] active:scale-95 transition-all"
         >
-          {isPending ? <Loader2 className="h-5 w-5 animate-spin mr-2" /> : <Save className="h-5 w-5 mr-2" />}
+          {isPending ? (
+            <Loader2 className="h-5 w-5 animate-spin mr-2" />
+          ) : (
+            <Save className="h-5 w-5 mr-2" />
+          )}
           Finalizar Atendimento
         </Button>
       </header>
@@ -155,11 +210,13 @@ export default function NewSessionPage() {
               <Label className="text-[11px] uppercase font-black text-muted-foreground tracking-widest italic text-secondary">
                 Paciente Vinculado
               </Label>
-              <PatientSelector selectedId={selectedPatient} onSelect={(id) => setSelectedPatient(id)} />
+              <PatientSelector
+                selectedId={selectedPatient}
+                onSelect={(id) => setSelectedPatient(id)}
+              />
             </div>
 
             <div className="space-y-4 border-t border-border/20 pt-6">
-              {/* Horário de Início (Garante 24h no seletor) */}
               <div className="space-y-2">
                 <Label className="text-[10px] uppercase font-bold text-muted-foreground flex items-center gap-2">
                   <Clock8 className="h-3.5 w-3.5 text-secondary" /> Início (24h)
@@ -173,7 +230,6 @@ export default function NewSessionPage() {
                 />
               </div>
 
-              {/* Duração */}
               <div className="space-y-2">
                 <Label className="text-[10px] uppercase font-bold text-muted-foreground flex items-center gap-2">
                   <Timer className="h-3.5 w-3.5 text-secondary" /> Duração
@@ -191,22 +247,26 @@ export default function NewSessionPage() {
                 </Select>
               </div>
 
-              {/* Previsão de Término */}
               <div className="p-4 rounded-2xl bg-secondary/5 border border-secondary/10 group transition-all">
-                <p className="text-[9px] uppercase font-black text-muted-foreground tracking-tighter">Previsão de Término</p>
+                <p className="text-[9px] uppercase font-black text-muted-foreground tracking-tighter">
+                  Previsão de Término
+                </p>
                 <p className="text-xl font-mono font-black text-secondary tracking-tighter">
                   {endTime}
                 </p>
               </div>
 
-              {/* Valor com Máscara e Trava */}
               <div className="space-y-2">
                 <Label className="text-[10px] uppercase font-bold text-muted-foreground flex items-center gap-2">
-                  <Banknote className="h-3.5 w-3.5 text-secondary" /> Valor da Sessão
+                  <Banknote className="h-3.5 w-3.5 text-secondary" /> Valor da
+                  Sessão
                 </Label>
                 <NumericFormat
-                  customInput={props => (
-                    <input {...props} className="w-full h-12 px-4 rounded-xl bg-background border border-border/40 font-bold text-sm focus:ring-2 focus:ring-secondary/20 outline-none" />
+                  customInput={(props) => (
+                    <input
+                      {...props}
+                      className="w-full h-12 px-4 rounded-xl bg-background border border-border/40 font-bold text-sm focus:ring-2 focus:ring-secondary/20 outline-none"
+                    />
                   )}
                   thousandSeparator="."
                   decimalSeparator=","
@@ -216,18 +276,24 @@ export default function NewSessionPage() {
                   onValueChange={(values) => setSessionValue(values.value)}
                   isAllowed={(values) => {
                     const { floatValue } = values;
-                    // Business Logic: Min 0, Max 1000 for presentation
-                    return floatValue === undefined || (floatValue >= 0 && floatValue <= 1000);
+                    return (
+                      floatValue === undefined ||
+                      (floatValue >= 0 && floatValue <= 1000)
+                    );
                   }}
                 />
-                <p className="text-[9px] text-muted-foreground italic leading-tight">Limite: R$ 1,00 a R$ 1.000,00</p>
+                <p className="text-[9px] text-muted-foreground italic leading-tight">
+                  Limite: R$ 1,00 a R$ 1.000,00
+                </p>
               </div>
             </div>
           </div>
 
           <div className="p-5 rounded-2xl bg-secondary/5 border border-secondary/10 flex gap-4 items-center">
             <CheckCircle2 className="h-5 w-5 text-secondary shrink-0" />
-            <span className="text-[10px] text-muted-foreground font-black uppercase tracking-wider">Draft Auto-save</span>
+            <span className="text-[10px] text-muted-foreground font-black uppercase tracking-wider">
+              Draft Auto-save
+            </span>
           </div>
         </aside>
 
@@ -238,7 +304,8 @@ export default function NewSessionPage() {
           <div className="flex items-center gap-2 px-2 py-4 text-muted-foreground/60 border-t border-border/10">
             <AlertCircle className="h-4 w-4" />
             <span className="text-[10px] font-medium italic leading-relaxed">
-              Sistema de prontuário em conformidade com as normas vigentes. Dados validados automaticamente.
+              Sistema de prontuário em conformidade com as normas vigentes.
+              Dados validados automaticamente.
             </span>
           </div>
         </div>

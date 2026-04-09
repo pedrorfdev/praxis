@@ -12,6 +12,7 @@ import {
   Undo,
   Redo,
   Palette,
+  Type,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -22,8 +23,16 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { Label } from "./ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
+import { useEffect, useState } from "react";
 
-const wordColors = [
+const colors = [
   { name: "Preto", color: "#000000" },
   { name: "Vermelho", color: "#e11d48" },
   { name: "Azul", color: "#2563eb" },
@@ -32,10 +41,30 @@ const wordColors = [
   { name: "Roxo", color: "#9333ea" },
 ];
 
+
 export const EditorMenuBar = ({ editor }: { editor: Editor | null }) => {
   if (!editor) return null;
+  const [activeSize, setActiveSize] = useState("16px");
 
+  const currentFontSize = editor.getAttributes("textStyle").fontSize || "16px";
   const currentColor = editor.getAttributes("textStyle").color || "#000000";
+
+  useEffect(() => {
+    if (!editor) return;
+    
+    const updateLabel = () => {
+      const size = editor.getAttributes("textStyle").fontSize || "16px";
+      setActiveSize(size);
+    };
+
+    editor.on("selectionUpdate", updateLabel);
+    editor.on("transaction", updateLabel);
+
+    return () => {
+      editor.off("selectionUpdate", updateLabel);
+      editor.off("transaction", updateLabel);
+    };
+  }, [editor]);
 
   const toggleAction = (callback: () => void) => (e: React.MouseEvent) => {
     e.preventDefault();
@@ -44,6 +73,47 @@ export const EditorMenuBar = ({ editor }: { editor: Editor | null }) => {
 
   return (
     <div className="flex flex-wrap items-center gap-1.5 p-2 bg-secondary/5 border border-border/40 rounded-t-3xl border-b-0 sticky top-[73px] z-10 backdrop-blur-sm">
+     <div className="flex items-center gap-1 bg-background p-1 rounded-xl shadow-inner border border-border/20">
+        <Popover>
+        <PopoverTrigger asChild>
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="h-8 min-w-[75px] justify-between px-3 bg-secondary/10 hover:bg-secondary/20"
+          >
+            <span className="text-[11px] font-bold font-mono text-primary">
+              {activeSize}
+            </span>
+            <Type className="h-3 w-3 opacity-50" />
+          </Button>
+        </PopoverTrigger>
+        
+        <PopoverContent className="w-[100px] p-1 bg-background border-border/40 shadow-2xl z-[60]" align="start">
+          <div className="flex flex-col gap-0.5">
+            {["12px", "14px", "16px", "18px", "24px", "32px"].map((size) => (
+              <Button
+                key={size}
+                variant="ghost"
+                size="sm"
+                className={cn(
+                  "h-8 justify-start font-mono text-xs",
+                  activeSize === size && "bg-secondary/20 text-secondary"
+                )}
+                onClick={() => {
+                  editor.chain().focus().setMark("textStyle", { fontSize: size }).run();
+                  setActiveSize(size);
+                }}
+              >
+                {size}
+              </Button>
+            ))}
+          </div>
+        </PopoverContent>
+      </Popover>
+      </div>
+
+      <Separator orientation="vertical" className="h-6 bg-border/40" />
+
       <div className="flex items-center gap-1 bg-background p-1 rounded-xl shadow-inner border border-border/20">
         <Button
           variant="ghost"
@@ -87,7 +157,7 @@ export const EditorMenuBar = ({ editor }: { editor: Editor | null }) => {
               Paleta Padrão
             </Label>
             <div className="grid grid-cols-5 gap-1.5">
-              {wordColors.map((c) => (
+              {colors.map((c) => (
                 <button
                   key={c.color}
                   onClick={() => editor.chain().focus().setColor(c.color).run()}
@@ -105,14 +175,12 @@ export const EditorMenuBar = ({ editor }: { editor: Editor | null }) => {
               </Label>
 
               <div className="flex items-center gap-3">
-                {/* O QUADRADO BONITO (Falso Input) */}
                 <div className="relative group cursor-pointer">
                   <div
                     className="h-10 w-10 rounded-xl border-2 border-background shadow-lg ring-1 ring-border/50 transition-transform group-hover:scale-110 active:scale-95"
                     style={{ backgroundColor: currentColor }}
                   />
 
-                  {/* O INPUT REAL (Invisível mas clicável) */}
                   <input
                     type="color"
                     value={currentColor}
@@ -123,7 +191,6 @@ export const EditorMenuBar = ({ editor }: { editor: Editor | null }) => {
                   />
                 </div>
 
-                {/* EXIBIÇÃO DO HEXADECIMAL */}
                 <div className="flex-1 flex flex-col justify-center px-4 h-10 bg-secondary/5 rounded-xl border border-border/40">
                   <span className="text-[10px] text-muted-foreground font-bold uppercase leading-none mb-1">
                     Hex Code
