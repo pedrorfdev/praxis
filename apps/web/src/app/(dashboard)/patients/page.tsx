@@ -135,7 +135,8 @@ export default function PatientsPage() {
 
       {isLoading && (
         <div className="flex items-center gap-2 text-xs text-muted-foreground animate-pulse">
-          <Loader2 className="h-3 w-3 animate-spin" /> Atualizando base de dados...
+          <Loader2 className="h-3 w-3 animate-spin" /> Atualizando base de
+          dados...
         </div>
       )}
 
@@ -188,10 +189,18 @@ function PatientCard({ patient }: { patient: any }) {
             >
               <Eye className="w-4 h-4 mr-2" /> Detalhes
             </DropdownMenuItem>
-            <DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={(e) => {
+                e.stopPropagation();
+                router.push(`/patients/${patient.id}/edit`);
+              }}
+            >
               <Pencil className="w-4 h-4 mr-2" /> Editar
             </DropdownMenuItem>
-            <DropdownMenuItem className="text-destructive">
+            <DropdownMenuItem
+              className="text-destructive"
+              onClick={(e) => e.stopPropagation()}
+            >
               <Trash2 className="w-4 h-4 mr-2" /> Remover
             </DropdownMenuItem>
           </DropdownMenuContent>
@@ -297,7 +306,12 @@ function PatientList({ patients }: { patients: any[] }) {
                   >
                     <Eye className="h-4 w-4 text-muted-foreground hover:text-primary" />
                   </Button>
-                  <Button variant="ghost" size="icon" title="Editar">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => router.push(`/patients/${patient.id}/edit`)}
+                    title="Editar"
+                  >
                     <Pencil className="h-4 w-4 text-muted-foreground hover:text-primary" />
                   </Button>
                   <Button
