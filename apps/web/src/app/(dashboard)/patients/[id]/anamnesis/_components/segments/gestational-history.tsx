@@ -1,9 +1,11 @@
 "use client";
 
 import { useFormContext } from "react-hook-form";
+import { useAnamnesis } from "../anamnesis-provider";
 
 export function GestationalHistory() {
   const { register } = useFormContext();
+  const { isLocked } = useAnamnesis();
 
   return (
     <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
@@ -23,6 +25,7 @@ export function GestationalHistory() {
           </label>
           <input
             {...register("gestational.mother_age")}
+            disabled={isLocked}
             type="number"
             placeholder="Ex: 28"
             className="w-full bg-[#0A0C10]/40 backdrop-blur-md border border-white/5 rounded-2xl p-4 text-zinc-200 outline-none focus:border-secondary/40 transition-all"
@@ -35,10 +38,15 @@ export function GestationalHistory() {
           </label>
           <select
             {...register("gestational.planned")}
+            disabled={isLocked}
             className="w-full bg-[#0A0C10]/40 backdrop-blur-md border border-white/5 rounded-2xl p-4 text-zinc-200 outline-none focus:border-secondary/40 transition-all appearance-none"
           >
-            <option value="sim" className="bg-[#0A0C10]">Sim</option>
-            <option value="nao" className="bg-[#0A0C10]">Não</option>
+            <option value="sim" className="bg-[#0A0C10]">
+              Sim
+            </option>
+            <option value="nao" className="bg-[#0A0C10]">
+              Não
+            </option>
           </select>
         </div>
 
@@ -48,6 +56,7 @@ export function GestationalHistory() {
           </label>
           <textarea
             {...register("gestational.complications")}
+            disabled={isLocked}
             placeholder="Ex: Diabetes gestacional, hipertensão, viroses..."
             className="w-full min-h-[120px] bg-[#0A0C10]/40 backdrop-blur-md border border-white/5 rounded-2xl p-6 text-zinc-200 placeholder:text-muted-foreground/30 outline-none focus:border-secondary/40 transition-all leading-relaxed"
           />

@@ -29,6 +29,7 @@ const items = [
   { title: "Dashboard", url: "/", icon: LayoutDashboard },
   { title: "Pacientes", url: "/patients", icon: Users },
   { title: "Prontuários", url: "/activity", icon: ClipboardList },
+  { title: "Responsáveis", url: "/caregivers", icon: Users },
   { title: "Configurações", url: "/settings", icon: Settings },
 ]
 
@@ -79,30 +80,6 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-
-      <SidebarFooter className="p-4 border-t border-border/40">
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton
-              size="lg"
-              className="hover:bg-secondary/10 group/user transition-colors"
-            >
-              <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold shadow-sm">
-                PF
-              </div>
-              <div className="grid flex-1 text-left text-sm leading-tight group-data-[collapsible=icon]:hidden ml-2">
-                <span className="truncate font-bold text-primary italic">
-                  Pedro Ferreira
-                </span>
-                <span className="truncate text-[10px] uppercase tracking-tighter text-muted-foreground font-medium">
-                  Software Engineer
-                </span>
-              </div>
-              <ChevronUp className="ml-auto size-4 opacity-50 group-data-[collapsible=icon]:hidden" />
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarFooter>
     </Sidebar>
   )
 }

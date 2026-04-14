@@ -1,8 +1,10 @@
 "use client";
 import { useFormContext } from "react-hook-form";
+import { useAnamnesis } from "../anamnesis-provider";
 
 export function DailyRoutine() {
   const { register } = useFormContext();
+  const { isLocked } = useAnamnesis();
 
   return (
     <div className="space-y-6">
@@ -17,6 +19,7 @@ export function DailyRoutine() {
             <label className="text-[10px] font-black uppercase tracking-widest text-secondary/70">{item.label}</label>
             <textarea
               {...register(`routine.${item.id}`)}
+              disabled={isLocked}
               placeholder={item.placeholder}
               className="w-full min-h-[80px] bg-[#0A0C10]/40 border border-white/5 rounded-2xl p-4 text-zinc-200 outline-none focus:border-secondary/40 transition-all"
             />

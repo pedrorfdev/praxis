@@ -1,8 +1,10 @@
 "use client";
 import { useFormContext } from "react-hook-form";
+import { useAnamnesis } from "../anamnesis-provider";
 
 export function NeuroDevelopment() {
   const { register } = useFormContext();
+  const { isLocked } = useAnamnesis();
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
@@ -22,6 +24,7 @@ export function NeuroDevelopment() {
             <label className="text-[10px] font-black uppercase tracking-widest text-secondary/70 ml-1">{item.label}</label>
             <input
               {...register(`neuro.${item.id}`)}
+              disabled={isLocked}
               placeholder={item.placeholder}
               className="w-full bg-[#0A0C10]/40 backdrop-blur-md border border-white/5 rounded-2xl p-4 text-zinc-200 outline-none focus:border-secondary/40 transition-all"
             />
@@ -32,6 +35,7 @@ export function NeuroDevelopment() {
           <label className="text-[10px] font-black uppercase tracking-widest text-secondary/70 ml-1">Linguagem (Primeiras palavras, balbucio)</label>
           <textarea
             {...register("neuro.language_notes")}
+            disabled={isLocked}
             placeholder="Descreva como foi o início da fala e comunicação..."
             className="w-full min-h-[100px] bg-[#0A0C10]/40 border border-white/5 rounded-2xl p-4 text-zinc-200 outline-none focus:border-secondary/40 transition-all"
           />

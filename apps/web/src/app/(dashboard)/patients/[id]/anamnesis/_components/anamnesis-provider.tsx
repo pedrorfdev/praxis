@@ -28,6 +28,7 @@ export function AnamnesisProvider({
 }) {
   const [currentStep, setStep] = useState("queixa-principal");
   const [completedSteps, setCompletedSteps] = useState<string[]>([]);
+  const [isLocked, setIsLocked] = useState(true);
   const storageKey = `praxis-anamnesis-${patientId}`;
 
   const methods = useForm({
@@ -86,6 +87,8 @@ export function AnamnesisProvider({
         prevStep,
         isLastStep: currentStep === ANAMNESIS_STEPS[ANAMNESIS_STEPS.length - 1],
         toggleStepCheck,
+        isLocked,
+        setIsLocked,
       }}
     >
       <FormProvider {...methods}>{children}</FormProvider>

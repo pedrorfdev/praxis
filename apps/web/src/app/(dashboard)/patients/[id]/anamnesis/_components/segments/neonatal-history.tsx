@@ -1,9 +1,11 @@
 "use client";
 
 import { useFormContext } from "react-hook-form";
+import { useAnamnesis } from "../anamnesis-provider";
 
 export function NeonatalHistory() {
   const { register } = useFormContext();
+  const { isLocked } = useAnamnesis();
 
   return (
     <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
@@ -23,6 +25,7 @@ export function NeonatalHistory() {
           </label>
           <select
             {...register("neonatal.delivery_type")}
+            disabled={isLocked}
             className="w-full bg-[#0A0C10]/40 backdrop-blur-md border border-white/5 rounded-2xl p-4 text-zinc-200 outline-none focus:border-secondary/40 transition-all appearance-none"
           >
             <option value="vaginal" className="bg-[#0A0C10]">Normal / Vaginal</option>
@@ -37,6 +40,7 @@ export function NeonatalHistory() {
           </label>
           <input
             {...register("neonatal.birth_weight")}
+            disabled={isLocked}
             type="text"
             placeholder="Ex: 3.250"
             className="w-full bg-[#0A0C10]/40 backdrop-blur-md border border-white/5 rounded-2xl p-4 text-zinc-200 outline-none focus:border-secondary/40 transition-all"
@@ -49,6 +53,7 @@ export function NeonatalHistory() {
           </label>
           <input
             {...register("neonatal.gestational_age")}
+            disabled={isLocked}
             type="number"
             placeholder="Ex: 38"
             className="w-full bg-[#0A0C10]/40 backdrop-blur-md border border-white/5 rounded-2xl p-4 text-zinc-200 outline-none focus:border-secondary/40 transition-all"
@@ -61,6 +66,7 @@ export function NeonatalHistory() {
           </label>
           <select
             {...register("neonatal.cried_at_birth")}
+            disabled={isLocked}
             className="w-full bg-[#0A0C10]/40 backdrop-blur-md border border-white/5 rounded-2xl p-4 text-zinc-200 outline-none focus:border-secondary/40 transition-all appearance-none"
           >
             <option value="sim" className="bg-[#0A0C10]">Sim</option>
@@ -75,6 +81,7 @@ export function NeonatalHistory() {
           </label>
           <select
             {...register("neonatal.icu_needed")}
+            disabled={isLocked}
             className="w-full bg-[#0A0C10]/40 backdrop-blur-md border border-white/5 rounded-2xl p-4 text-zinc-200 outline-none focus:border-secondary/40 transition-all appearance-none"
           >
             <option value="nao" className="bg-[#0A0C10]">Não</option>
@@ -88,6 +95,7 @@ export function NeonatalHistory() {
           </label>
           <input
             {...register("neonatal.apgar_score")}
+            disabled={isLocked}
             type="text"
             placeholder="Ex: 9/10"
             className="w-full bg-[#0A0C10]/40 backdrop-blur-md border border-white/5 rounded-2xl p-4 text-zinc-200 outline-none focus:border-secondary/40 transition-all"
@@ -100,6 +108,7 @@ export function NeonatalHistory() {
           </label>
           <textarea
             {...register("neonatal.post_birth_complications")}
+            disabled={isLocked}
             placeholder="Ex: Icterícia, fototerapia, dificuldade na amamentação..."
             className="w-full min-h-[100px] bg-[#0A0C10]/40 backdrop-blur-md border border-white/5 rounded-2xl p-6 text-zinc-200 placeholder:text-muted-foreground/30 outline-none focus:border-secondary/40 transition-all leading-relaxed"
           />

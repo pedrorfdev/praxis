@@ -1,52 +1,55 @@
-import { Users, CalendarCheck, Clock, FileText } from "lucide-react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Users, FileCheck, Activity } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const metrics = [
   {
-    title: "Sessões Hoje",
-    value: "8",
-    description: "4 finalizadas",
-    icon: CalendarCheck,
-    color: "text-secondary",
-  },
-  {
     title: "Pacientes Ativos",
-    value: "24",
-    description: "+2 este mês",
+    value: "42",
     icon: Users,
-    color: "text-primary",
+    color: "text-blue-400",
+    className: "md:col-span-2 lg:col-span-2",
   },
   {
-    title: "Evoluções Pendentes",
-    value: "3",
-    description: "Prontuários para fechar",
-    icon: FileText,
-    color: "text-destructive",
+    title: "Atendimentos",
+    value: "18",
+    icon: Activity,
+    color: "text-secondary",
+    className: "md:col-span-2 lg:col-span-3",
   },
   {
-    title: "Horas de Terapia",
-    value: "32h",
-    description: "Total na semana",
-    icon: Clock,
-    color: "text-muted-foreground",
+    title: "Evoluções Finalizadas",
+    value: "156",
+    icon: FileCheck,
+    color: "text-green-400",
+    className: "md:col-span-2 lg:col-span-2",
   },
-]
+];
 
 export function MetricsGrid() {
   return (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-      {metrics.map((item) => (
-        <Card key={item.title} className="border-border/50 shadow-sm">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">{item.title}</CardTitle>
-            <item.icon className={`h-4 w-4 ${item.color}`} />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{item.value}</div>
-            <p className="text-xs text-muted-foreground">{item.description}</p>
-          </CardContent>
-        </Card>
+    <div className="grid gap-4 md:grid-cols-4 lg:grid-cols-7">
+      {metrics.map((metric) => (
+        <div
+          key={metric.title}
+          className={cn(
+            "relative overflow-hidden rounded-[2rem] border border-border/40 bg-card/50 p-6 transition-all hover:border-secondary/30",
+            metric.className
+          )}
+        >
+          <div className="flex items-center justify-between space-y-0 pb-2">
+            <p className="text-sm font-bold uppercase tracking-widest text-muted-foreground">
+              {metric.title}
+            </p>
+            <metric.icon className={cn("h-5 w-5", metric.color)} />
+          </div>
+          <div className="flex items-baseline gap-2">
+            <h2 className="text-4xl font-black tracking-tighter text-primary">
+              {metric.value}
+            </h2>
+          </div>          
+          <div className="absolute -right-4 -bottom-4 h-24 w-24 rounded-full bg-secondary/5 blur-3xl" />
+        </div>
       ))}
     </div>
-  )
+  );
 }

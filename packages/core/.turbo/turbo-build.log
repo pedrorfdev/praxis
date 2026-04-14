@@ -8,21 +8,22 @@
 [34mCLI[39m tsup v8.5.1
 [34mCLI[39m Using tsup config: /home/pedro/dev/praxis/packages/core/tsup.config.ts
 [34mCLI[39m Target: es2022
-[31mError: ENOENT: no such file or directory, unlink '/home/pedro/dev/praxis/packages/core/dist/domain/index.mjs'
-    at Object.unlinkSync (node:fs:1931:11)
-    at /home/pedro/dev/praxis/node_modules/tsup/dist/chunk-TWFEYLU4.js:143:73
-    at Array.forEach (<anonymous>)
-    at removeFiles (/home/pedro/dev/praxis/node_modules/tsup/dist/chunk-TWFEYLU4.js:143:9)
-    at async buildAll (/home/pedro/dev/praxis/node_modules/tsup/dist/index.js:1595:17)
-    at async mainTasks (/home/pedro/dev/praxis/node_modules/tsup/dist/index.js:1699:13)
-    at async Promise.all (index 1)
-    at async /home/pedro/dev/praxis/node_modules/tsup/dist/index.js:1703:9
-    at async Promise.all (index 0)
-    at async build (/home/pedro/dev/praxis/node_modules/tsup/dist/index.js:1494:3)[39m
+[34mCLI[39m Cleaning output folder
+[34mCJS[39m Build start
+[34mESM[39m Build start
+[32mESM[39m [1mdist/domain/index.mjs     [22m[32m5.05 KB[39m
+[32mESM[39m [1mdist/infra/index.mjs      [22m[32m3.31 KB[39m
+[32mESM[39m [1mdist/domain/index.mjs.map [22m[32m9.69 KB[39m
+[32mESM[39m [1mdist/infra/index.mjs.map  [22m[32m6.37 KB[39m
+[32mESM[39m ⚡️ Build success in 90ms
+[32mCJS[39m [1mdist/domain/index.js     [22m[32m6.99 KB[39m
+[32mCJS[39m [1mdist/infra/index.js      [22m[32m5.67 KB[39m
+[32mCJS[39m [1mdist/domain/index.js.map [22m[32m9.86 KB[39m
+[32mCJS[39m [1mdist/infra/index.js.map  [22m[32m6.34 KB[39m
+[32mCJS[39m ⚡️ Build success in 91ms
 DTS Build start
-DTS ⚡️ Build success in 6431ms
+DTS ⚡️ Build success in 4624ms
 DTS dist/domain/index.d.ts  5.83 KB
 DTS dist/infra/index.d.ts   47.33 KB
 DTS dist/domain/index.d.mts 5.83 KB
 DTS dist/infra/index.d.mts  47.33 KB
-[41m[30m ELIFECYCLE [39m[49m [31mCommand failed with exit code 1.[39m

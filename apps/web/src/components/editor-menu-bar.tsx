@@ -46,7 +46,6 @@ export const EditorMenuBar = ({ editor }: { editor: Editor | null }) => {
   if (!editor) return null;
   const [activeSize, setActiveSize] = useState("16px");
 
-  const currentFontSize = editor.getAttributes("textStyle").fontSize || "16px";
   const currentColor = editor.getAttributes("textStyle").color || "#000000";
 
   useEffect(() => {

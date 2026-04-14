@@ -1,6 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { Controller, useFormContext, useWatch } from "react-hook-form";
+import { useAnamnesis } from "../anamnesis-provider";
 
 export function DiagnosisHistory() {
   const { control, register } = useFormContext();
@@ -8,6 +9,7 @@ export function DiagnosisHistory() {
     control,
     name: "diagnosis.uses_medication",
   });
+  const { isLocked } = useAnamnesis();
 
   return (
     <div className="space-y-8 animate-in fade-in duration-700">
@@ -18,6 +20,7 @@ export function DiagnosisHistory() {
           </label>
           <input
             {...register("diagnosis.description")}
+            disabled={isLocked}
             placeholder="Ex: TEA Nível 1, TDAH, etc."
             className="w-full bg-[#0A0C10]/40 border border-white/5 rounded-2xl p-4 text-zinc-200 outline-none focus:border-secondary/40"
           />
@@ -29,6 +32,7 @@ export function DiagnosisHistory() {
           </label>
           <input
             {...register("diagnosis.discovery_method")}
+            disabled={isLocked}
             className="w-full bg-[#0A0C10]/40 border border-white/5 rounded-2xl p-4 text-zinc-200 outline-none"
           />
         </div>
@@ -39,6 +43,7 @@ export function DiagnosisHistory() {
           </label>
           <input
             {...register("diagnosis.age_at_diagnosis")}
+            disabled={isLocked}
             className="w-full bg-[#0A0C10]/40 border border-white/5 rounded-2xl p-4 text-zinc-200 outline-none"
           />
         </div>
@@ -49,6 +54,7 @@ export function DiagnosisHistory() {
           </label>
           <input
             {...register("diagnosis.follow_ups")}
+            disabled={isLocked}
             className="w-full bg-[#0A0C10]/40 border border-white/5 rounded-2xl p-4 text-zinc-200 outline-none mt-3"
           />
         </div>
@@ -81,6 +87,7 @@ export function DiagnosisHistory() {
                     </button>
                   );
                 })}
+                disabled={isLocked}
               </div>
             )}
           />

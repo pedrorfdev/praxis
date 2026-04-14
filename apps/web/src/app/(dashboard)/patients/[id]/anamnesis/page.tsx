@@ -2,7 +2,7 @@
 
 import { useFormContext } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, Save } from "lucide-react";
+import { ChevronLeft, ChevronRight, Lock, LockOpen, Save } from "lucide-react";
 import { MainComplaint } from "./_components/segments/main-complaint";
 import { GestationalHistory } from "./_components/segments/gestational-history";
 import { NeonatalHistory } from "./_components/segments/neonatal-history";
@@ -17,9 +17,10 @@ import { DailyRoutine } from "./_components/segments/daily-routine";
 import { FamilyContext } from "./_components/segments/family-context";
 import { FamilyExpectations } from "./_components/segments/family-expectations";
 import { BehaviorRegulation } from "./_components/segments/behavior-regulation";
+import { cn } from "@/lib/utils";
 
 export default function AnamnesisPage() {
-  const { currentStep, nextStep, prevStep, isLastStep } = useAnamnesis();
+  const { currentStep, nextStep, prevStep, isLastStep, isLocked, setIsLocked } = useAnamnesis();
   const { handleSubmit } = useFormContext();
 
   const onFinalSubmit = (data: any) => {
@@ -74,6 +75,27 @@ export default function AnamnesisPage() {
 
   return (
     <div className="flex flex-col min-h-[600px] justify-between">
+      <div className="flex justify-end mb-6">
+        <Button
+          type="button"
+          variant="outline"
+          onClick={() => setIsLocked(!isLocked)}
+          className={cn(
+            "rounded-xl border-2 gap-2 font-bold uppercase tracking-widest text-[10px] transition-all cursor-pointer",
+            isLocked 
+              ? "border-zinc-800 text-zinc-500 hover:bg-zinc-800" 
+              : "border-secondary/50 text-secondary bg-secondary/5"
+          )}
+        >
+          {isLocked ? (
+            <><Lock className="w-3 h-3" /> Modo Visualização Ativado</>
+          ) : (
+            <><LockOpen className="w-3 h-3" /> Modo Edição Ativado</>
+          )}
+        </Button>
+      </div>
+
+
       <div className="flex-1">{renderSegment()}</div>
 
       <div className="mt-12 pt-6 border-t border-white/5 flex items-center justify-between">

@@ -1,9 +1,11 @@
 "use client";
 
 import { useFormContext } from "react-hook-form";
+import { useAnamnesis } from "../anamnesis-provider";
 
 export function MainComplaint() {
   const { register } = useFormContext();
+  const { isLocked } = useAnamnesis();
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
@@ -26,6 +28,7 @@ export function MainComplaint() {
           
           <textarea
             {...register("main_complaint.description")}
+            disabled={isLocked}
             placeholder="Ex: Dificuldade na fala, seletividade alimentar, atraso motor..."
             className="relative w-full min-h-[250px] bg-[#0A0C10]/60 backdrop-blur-md border border-white/5 rounded-[2rem] p-8 text-zinc-200 placeholder:text-muted-foreground/30 outline-none focus:border-secondary/40 transition-all leading-relaxed antialiased"
           />
