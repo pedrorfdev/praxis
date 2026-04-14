@@ -7,6 +7,7 @@ import Link from "next/link";
 export default function EditCaregiverPage({ params }: { params: { id: string } }) {
 
   const mockData = {
+    id: 1,
     name: "Mariana Silva",
     kinship: "Mãe",
     phone: "(11) 98888-7777",
@@ -18,7 +19,7 @@ export default function EditCaregiverPage({ params }: { params: { id: string } }
   };
 
   return (
-    <div className="flex-1 space-y-8 p-8 pt-6 max-w-2xl mx-auto animate-in fade-in duration-500">
+    <div className="flex-1 space-y-8 p-8 pt-6 w-5xl mx-auto animate-in fade-in duration-500">
       <Link 
         href={`/caregivers/${params.id}`} 
         className="flex items-center gap-2 text-zinc-500 hover:text-secondary transition-colors text-sm font-bold"
