@@ -36,18 +36,19 @@ export function GestationalHistory() {
           <label className="text-xs font-black uppercase tracking-widest text-secondary/70 ml-1">
             Gravidez planejada?
           </label>
-          <select
-            {...register("gestational.planned")}
-            disabled={isLocked}
-            className="w-full bg-card border border-border rounded-lg p-4 text-foreground outline-none focus:border-secondary/40 focus:shadow-md appearance-none"
-          >
-            <option value="sim" className="bg-[#0A0C10]">
-              Sim
-            </option>
-            <option value="nao" className="bg-[#0A0C10]">
-              Não
-            </option>
-          </select>
+          <div className="relative">
+            <select
+              {...register("gestational.planned")}
+              disabled={isLocked}
+              className="w-full bg-card border border-border rounded-lg p-4 pr-10 text-foreground outline-none focus:border-secondary/40 focus:shadow-md appearance-none"
+            >
+              <option value="sim">Sim</option>
+              <option value="nao">Não</option>
+            </select>
+            <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </div>
         </div>
 
         <div className="space-y-3 md:col-span-2">
@@ -58,7 +59,7 @@ export function GestationalHistory() {
             {...register("gestational.complications")}
             disabled={isLocked}
             placeholder="Ex: Diabetes gestacional, hipertensão, viroses..."
-            className="w-full min-h-[120px] bg-card border border-border rounded-lg p-6 text-foreground placeholder:text-muted-foreground outline-none focus:border-secondary/40 focus:shadow-md leading-relaxed"
+            className="w-full min-h-32 bg-card border border-border rounded-lg p-6 text-foreground placeholder:text-muted-foreground outline-none focus:border-secondary/40 focus:shadow-md leading-relaxed"
           />
         </div>
       </div>

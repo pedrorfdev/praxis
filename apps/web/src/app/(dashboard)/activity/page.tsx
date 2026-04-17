@@ -66,7 +66,7 @@ export default function ActivityPage() {
                   <h3 className="font-semibold text-zinc-500 group-hover:text-primary/40 transition-colors">
                     {activity.patientName}
                   </h3>
-                  <span className="text-[10px] uppercase tracking-wider text-zinc-500 font-bold">
+                  <span className="text-xs uppercase tracking-wider text-zinc-500 font-bold">
                     {formatDateLabel(activity.date)}
                   </span>
                 </div>

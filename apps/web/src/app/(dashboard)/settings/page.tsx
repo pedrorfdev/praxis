@@ -32,11 +32,11 @@ export default function SettingsPage() {
         </TabsList>
 
         <TabsContent value="profile" className="space-y-6 animate-in slide-in-from-bottom-2 duration-400 outline-none">
-          <div className="rounded-[40px] border border-border bg-card p-8 md:p-12 shadow-sm">
+          <div className="rounded-3xl border border-border bg-card p-8 md:p-12 shadow-sm">
             <div className="space-y-8">
               <div className="grid gap-8 md:grid-cols-2">
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground ml-1">Nome Profissional</label>
+                  <label className="text-xs font-black uppercase tracking-widest text-muted-foreground ml-1">Nome Profissional</label>
                   <div className="relative">
                     <User className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     <Input defaultValue="Pedro Ferreira" className="rounded-2xl h-14 pl-12 font-medium" />
@@ -44,7 +44,7 @@ export default function SettingsPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground ml-1">Registro (CRP/CREFITO)</label>
+                  <label className="text-xs font-black uppercase tracking-widest text-muted-foreground ml-1">Registro (CRP/CREFITO)</label>
                   <div className="relative">
                     <ClipboardList className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     <Input placeholder="00/00000" className="rounded-2xl h-14 pl-12" />
@@ -52,12 +52,12 @@ export default function SettingsPage() {
                 </div>
 
                 <div className="space-y-2 md:col-span-2">
-                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground ml-1">E-mail de Acesso</label>
+                  <label className="text-xs font-black uppercase tracking-widest text-muted-foreground ml-1">E-mail de Acesso</label>
                   <div className="relative">
                     <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     <Input defaultValue="pedro@praxis.com" className="rounded-2xl h-14 pl-12 opacity-50 cursor-not-allowed" disabled />
                   </div>
-                  <p className="text-[10px] text-muted-foreground italic ml-1">* O e-mail não pode ser alterado diretamente por questões de segurança.</p>
+                  <p className="text-xs text-muted-foreground italic ml-1">* O e-mail não pode ser alterado diretamente por questões de segurança.</p>
                 </div>
               </div>
 
@@ -71,10 +71,10 @@ export default function SettingsPage() {
         </TabsContent>
 
         <TabsContent value="clinic" className="space-y-6 animate-in slide-in-from-bottom-2 duration-400 outline-none">
-          <div className="rounded-[40px] border border-border bg-card p-8 md:p-12 space-y-10">
+          <div className="rounded-3xl border border-border bg-card p-8 md:p-12 space-y-10">
             <div className="grid gap-8 md:grid-cols-2">
               <div className="space-y-2 md:col-span-2">
-                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground ml-1">Nome da Clínica / Consultório</label>
+                <label className="text-xs font-black uppercase tracking-widest text-muted-foreground ml-1">Nome da Clínica / Consultório</label>
                 <div className="relative">
                   <Building className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input placeholder="Ex: Praxis Terapia Ocupacional" className="rounded-2xl h-14 pl-12 font-medium" />
@@ -82,7 +82,7 @@ export default function SettingsPage() {
               </div>
 
               <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground ml-1">CNPJ (Opcional)</label>
+                <label className="text-xs font-black uppercase tracking-widest text-muted-foreground ml-1">CNPJ (Opcional)</label>
                 <div className="relative">
                   <Hash className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input placeholder="00.000.000/0000-00" className="rounded-2xl h-14 pl-12" />
@@ -90,7 +90,7 @@ export default function SettingsPage() {
               </div>
 
               <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground ml-1">Cidade / UF</label>
+                <label className="text-xs font-black uppercase tracking-widest text-muted-foreground ml-1">Cidade / UF</label>
                 <div className="relative">
                   <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input placeholder="São Paulo - SP" className="rounded-2xl h-14 pl-12" />
@@ -98,7 +98,7 @@ export default function SettingsPage() {
               </div>
 
               <div className="space-y-2 md:col-span-2">
-                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground ml-1">Endereço Completo</label>
+                <label className="text-xs font-black uppercase tracking-widest text-muted-foreground ml-1">Endereço Completo</label>
                 <Input placeholder="Rua, Número, Complemento, Bairro" className="rounded-2xl h-14 px-6 font-medium" />
               </div>
             </div>
@@ -112,7 +112,7 @@ export default function SettingsPage() {
         </TabsContent>
 
         <TabsContent value="security" className="space-y-6 animate-in slide-in-from-bottom-2 duration-400 outline-none">
-          <div className="rounded-[40px] border border-border bg-card p-8 md:p-12 max-w-2xl">
+          <div className="rounded-3xl border border-border bg-card p-8 md:p-12 max-w-2xl">
             <div className="space-y-8">
               <div className="space-y-1">
                 <h3 className="text-xl font-bold text-foreground flex items-center gap-2 italic">
@@ -123,7 +123,7 @@ export default function SettingsPage() {
 
               <div className="space-y-6">
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground ml-1">Senha Atual</label>
+                  <label className="text-xs font-black uppercase tracking-widest text-muted-foreground ml-1">Senha Atual</label>
                   <div className="relative">
                     <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     <Input type="password" placeholder="••••••••" className="rounded-2xl h-14 pl-12" />
@@ -134,11 +134,11 @@ export default function SettingsPage() {
 
                 <div className="grid gap-6 md:grid-cols-2">
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground ml-1">Nova Senha</label>
+                    <label className="text-xs font-black uppercase tracking-widest text-muted-foreground ml-1">Nova Senha</label>
                     <Input type="password" placeholder="••••••••" className="rounded-2xl h-14 px-6" />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground ml-1">Confirmar Nova Senha</label>
+                    <label className="text-xs font-black uppercase tracking-widest text-muted-foreground ml-1">Confirmar Nova Senha</label>
                     <Input type="password" placeholder="••••••••" className="rounded-2xl h-14 px-6" />
                   </div>
                 </div>

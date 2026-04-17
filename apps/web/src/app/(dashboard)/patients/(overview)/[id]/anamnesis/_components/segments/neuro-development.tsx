@@ -37,7 +37,7 @@ export function NeuroDevelopment() {
             {...register("neuro.language_notes")}
             disabled={isLocked}
             placeholder="Descreva como foi o início da fala e comunicação..."
-            className="w-full min-h-[100px] bg-card border border-border rounded-lg p-4 text-foreground outline-none focus:border-secondary/40 focus:shadow-md transition-all"
+            className="w-full min-h-28 bg-card border border-border rounded-lg p-4 text-foreground outline-none focus:border-secondary/40 focus:shadow-md transition-all"
           />
         </div>
       </div>

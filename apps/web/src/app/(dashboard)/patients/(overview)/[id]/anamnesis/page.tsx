@@ -17,6 +17,7 @@ import { DailyRoutine } from "./_components/segments/daily-routine";
 import { FamilyContext } from "./_components/segments/family-context";
 import { FamilyExpectations } from "./_components/segments/family-expectations";
 import { BehaviorRegulation } from "./_components/segments/behavior-regulation";
+import { PatientMiniHeader } from "./_components/patient-mini-header";
 import { cn } from "@/lib/utils";
 
 export default function AnamnesisPage() {
@@ -74,61 +75,64 @@ export default function AnamnesisPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-[600px] justify-between">
-      <div className="flex justify-end mb-6">
-        <Button
-          type="button"
-          variant="outline"
-          onClick={() => setIsLocked(!isLocked)}
-          className={cn(
-            "rounded-xl border-2 gap-2 font-bold uppercase tracking-widest text-[10px] transition-all cursor-pointer",
-            isLocked 
-              ? "border-zinc-800 text-zinc-500 hover:bg-zinc-800" 
-              : "border-secondary/50 text-secondary bg-secondary/5"
-          )}
-        >
-          {isLocked ? (
-            <><Lock className="w-3 h-3" /> Modo Visualização Ativado</>
+    <div className="flex flex-col min-h-screen">
+      <PatientMiniHeader />
+
+      <div className="flex flex-col max-w-7xl mx-auto w-full px-4">
+        <div className="flex justify-end mb-6">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => setIsLocked(!isLocked)}
+            className={cn(
+              "rounded-xl border-2 gap-2 font-bold uppercase tracking-widest text-xs transition-all cursor-pointer",
+              isLocked 
+                ? "border-zinc-800 text-zinc-500 hover:bg-zinc-800" 
+                : "border-secondary/50 text-secondary bg-secondary/5"
+            )}
+          >
+            {isLocked ? (
+              <><Lock className="w-3 h-3" /> Modo Visualização Ativado</>
+            ) : (
+              <><LockOpen className="w-3 h-3" /> Modo Edição Ativado</>
+            )}
+          </Button>
+        </div>
+
+        <div className="flex-1">{renderSegment()}</div>
+
+        <div className="mt-12 pt-6 border-t border-white/5 flex items-center justify-between">
+          <Button
+            type="button"
+            variant="ghost"
+            onClick={prevStep}
+            disabled={currentStep === ANAMNESIS_STEPS[0]}
+            className="text-muted-foreground hover:text-primary transition-colors"
+          >
+            <ChevronLeft className="w-4 h-4 mr-2" />
+            Voltar
+          </Button>
+
+          {!isLastStep ? (
+            <Button
+              type="button"
+              onClick={nextStep}
+              className="bg-secondary text-secondary-foreground font-bold px-8 rounded-xl hover:scale-105 transition-all"
+            >
+              Próximo Passo
+              <ChevronRight className="w-4 h-4 ml-2" />
+            </Button>
           ) : (
-            <><LockOpen className="w-3 h-3" /> Modo Edição Ativado</>
+            <Button
+              type="button"
+              onClick={handleSubmit(onFinalSubmit)}
+              className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-8 rounded-xl hover:scale-105 transition-all"
+            >
+              <Save className="w-4 h-4 mr-2" />
+              Finalizar Anamnese
+            </Button>
           )}
-        </Button>
-      </div>
-
-
-      <div className="flex-1">{renderSegment()}</div>
-
-      <div className="mt-12 pt-6 border-t border-white/5 flex items-center justify-between">
-        <Button
-          type="button"
-          variant="ghost"
-          onClick={prevStep}
-          disabled={currentStep === ANAMNESIS_STEPS[0]}
-          className="text-muted-foreground hover:text-primary transition-colors"
-        >
-          <ChevronLeft className="w-4 h-4 mr-2" />
-          Voltar
-        </Button>
-
-        {!isLastStep ? (
-          <Button
-            type="button"
-            onClick={nextStep}
-            className="bg-secondary text-secondary-foreground font-bold px-8 rounded-xl hover:scale-105 transition-all"
-          >
-            Próximo Passo
-            <ChevronRight className="w-4 h-4 ml-2" />
-          </Button>
-        ) : (
-          <Button
-            type="button"
-            onClick={handleSubmit(onFinalSubmit)}
-            className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-8 rounded-xl hover:scale-105 transition-all"
-          >
-            <Save className="w-4 h-4 mr-2" />
-            Finalizar Anamnese
-          </Button>
-        )}
+        </div>
       </div>
     </div>
   );

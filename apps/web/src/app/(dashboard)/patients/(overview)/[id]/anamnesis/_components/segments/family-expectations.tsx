@@ -19,7 +19,7 @@ export function FamilyExpectations() {
           {...register("expectations.final_notes")}
           disabled={isLocked}
           placeholder="Quais os maiores desejos da família para o desenvolvimento da criança?" 
-          className="w-full min-h-[250px] bg-card border border-border rounded-lg p-8 text-foreground outline-none focus:border-secondary/40 focus:shadow-md"
+          className="w-full min-h-96 bg-card border border-border rounded-lg p-8 text-foreground outline-none focus:border-secondary/40 focus:shadow-md"
         />
       </div>
     </div>

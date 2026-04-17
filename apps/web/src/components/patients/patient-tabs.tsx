@@ -21,7 +21,7 @@ export function PatientTabs({ patientId }: { patientId: string }) {
             key={tab.href}
             href={tab.href}
             className={cn(
-              "px-6 py-2.5 text-[10px] font-black uppercase tracking-widest rounded-xl transition-all",
+              "px-6 py-2.5 text-xs font-black uppercase tracking-widest rounded-lg transition-all",
               isActive 
                 ? "bg-secondary text-secondary-foreground shadow-lg shadow-secondary/20" 
                 : "text-muted-foreground hover:text-primary hover:bg-secondary/5"

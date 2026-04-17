@@ -15,7 +15,7 @@ export function BehaviorRegulation() {
             {...register("behavior.crises_description")}
             disabled={isLocked}
             placeholder="Frequência, intensidade, como ocorrem..." 
-            className="w-full min-h-[100px] bg-card border border-border rounded-lg p-4 text-foreground outline-none focus:border-secondary/40 focus:shadow-md"
+            className="w-full min-h-28 bg-card border border-border rounded-lg p-4 text-foreground outline-none focus:border-secondary/40 focus:shadow-md"
           />
         </div>
 

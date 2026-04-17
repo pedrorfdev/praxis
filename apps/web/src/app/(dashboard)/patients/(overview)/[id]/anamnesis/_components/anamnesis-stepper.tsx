@@ -8,9 +8,9 @@ export function AnamnesisStepper() {
   const { currentStep, setStep, completedSteps, toggleStepCheck } = useAnamnesis();
 
   return (
-    <nav className="bg-card border border-border rounded-[2.5rem] p-5 shadow-sm space-y-6 sticky top-8">
+    <nav className="bg-card border border-border rounded-xl p-5 shadow-sm space-y-6 sticky top-8">
       <div className="px-3">
-        <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-secondary/60">
+        <h3 className="text-xs font-black uppercase tracking-widest text-secondary/60">
           Progresso
         </h3>
         <p className="text-sm font-bold text-foreground">Sessões da Anamnese</p>
@@ -64,7 +64,7 @@ export function AnamnesisStepper() {
                 <div className="flex flex-col overflow-hidden">
                   <span
                     className={cn(
-                      "text-[8px] font-black uppercase tracking-widest transition-colors",
+                      "text-xs font-black uppercase tracking-widest transition-colors",
                       isActive ? "text-secondary" : "text-muted-foreground/50",
                     )}
                   >
@@ -72,7 +72,7 @@ export function AnamnesisStepper() {
                   </span>
                   <span
                     className={cn(
-                      "text-[13px] font-bold truncate transition-colors capitalize",
+                      "text-sm font-bold truncate transition-colors capitalize",
                       isActive
                         ? "text-foreground"
                         : "text-muted-foreground group-hover:text-foreground/80",

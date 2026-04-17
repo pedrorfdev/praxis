@@ -41,7 +41,7 @@ export function AnamnesisNavigationFooter() {
       {isLastStep ? (
         <Button
           type="submit"
-          className="gap-2 rounded-2xl bg-secondary text-secondary-foreground hover:bg-secondary/90 px-8 shadow-[0_0_20px_rgba(var(--secondary),0.3)] transition-all"
+          className="gap-2 rounded-lg bg-secondary text-secondary-foreground hover:bg-secondary/90 px-8 shadow-[0_0_20px_rgba(var(--secondary),0.3)] transition-all"
         >
           Finalizar Anamnese
           <Check className="h-4 w-4" />

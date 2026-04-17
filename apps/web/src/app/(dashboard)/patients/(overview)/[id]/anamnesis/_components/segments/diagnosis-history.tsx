@@ -76,18 +76,19 @@ export function DiagnosisHistory() {
                       key={op}
                       type="button"
                       onClick={() => field.onChange(op)}
+                      disabled={isLocked}
                       className={cn(
                         "flex-1 p-3 rounded-lg border text-xs font-bold transition-all duration-200",
                         isActive 
                           ? "border-secondary bg-secondary/10 text-secondary" 
-                          : "border-border bg-card text-muted-foreground"
+                          : "border-border bg-card text-muted-foreground",
+                        isLocked && "opacity-50 cursor-not-allowed"
                       )}
                     >
                       {op}
                     </button>
                   );
                 })}
-                disabled={isLocked}
               </div>
             )}
           />
@@ -96,11 +97,12 @@ export function DiagnosisHistory() {
         {/* Agora o condicional usa o valor do useWatch */}
         {usesMedication === "Sim" && (
           <div className="space-y-3 md:col-span-2 animate-in slide-in-from-top-2 duration-300">
-            <label className="text-[10px] font-black uppercase tracking-widest text-secondary/70 text-emerald-500/80">
+            <label className="text-xs font-black uppercase tracking-widest text-secondary/70">
               Quais medicações?
             </label>
             <textarea 
               {...register("diagnosis.medication_details")} 
+              disabled={isLocked}
               className="w-full bg-card border border-border rounded-lg p-4 text-foreground outline-none focus:border-secondary/40 focus:shadow-md" 
               placeholder="Descreva..."
             />

@@ -59,10 +59,10 @@ export function PatientSelector({ onSelect, selectedId }: PatientSelectorProps) 
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0 rounded-2xl shadow-2xl border-border/40" align="start">
-        <Command className="rounded-2xl">
+      <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0 rounded-xl shadow-2xl border-border/40" align="start">
+        <Command className="rounded-xl">
           <CommandInput placeholder="Search patient name..." className="h-12" />
-          <CommandList className="max-h-[300px]">
+          <CommandList className="max-h-72">
             <CommandEmpty className="py-6 text-center">
               <p className="text-xs text-muted-foreground">Nenhum paciente encontrado.</p>
               <Button variant="ghost" size="sm" className="mt-2 text-secondary font-bold text-[10px] uppercase">

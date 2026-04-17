@@ -21,7 +21,7 @@ export default function PatientLayout({ children, params }: PatientLayoutProps) 
 
   const sidebarContent = isAnamnesis ? (
     <div className="sticky top-8 space-y-4">
-      <h3 className="px-4 text-[10px] font-black uppercase tracking-widest text-muted-foreground">Progresso</h3>
+      <h3 className="px-4 text-xs font-black uppercase tracking-widest text-muted-foreground">Progresso</h3>
       <AnamnesisStepper />
     </div>
   ) : (

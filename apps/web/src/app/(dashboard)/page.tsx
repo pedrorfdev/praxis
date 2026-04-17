@@ -26,12 +26,12 @@ export default function DashboardPage() {
       <MetricsGrid />
 
       <div className="grid gap-6 lg:grid-cols-2">
-        <div className="bg-card/30 border border-border/40 rounded-[2.5rem] p-6">
+        <div className="bg-card/30 border border-border/40 rounded-xl p-6">
           <h3 className="text-lg font-bold text-primary mb-4">Distribuição por Especialidade</h3>
           <SpecialtyChart />
         </div>
 
-        <div className="bg-card/30 border border-border/40 rounded-[2.5rem] p-8 flex flex-col justify-center items-center text-center space-y-4">
+        <div className="bg-card/30 border border-border/40 rounded-xl p-8 flex flex-col justify-center items-center text-center space-y-4">
            <div className="h-16 w-16 rounded-full bg-secondary/10 flex items-center justify-center">
               <TrendingUp className="h-8 w-8 text-primary" />
            </div>

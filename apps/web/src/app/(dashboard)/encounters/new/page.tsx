@@ -93,7 +93,7 @@ function EncounterPageContent() {
     editorProps: {
       attributes: {
         class: cn(
-          "prose prose-slate max-w-full focus:outline-none min-h-[600px] p-12 rounded-b-3xl border border-border/40 bg-card leading-relaxed transition-all",
+          "prose prose-slate max-w-full focus:outline-none min-h-screen p-12 rounded-b-lg border border-border/40 bg-card leading-relaxed transition-all",
           "text-zinc-200 prose-headings:text-secondary prose-p:text-zinc-300 prose-strong:text-white",
           isLocked && "opacity-80 grayscale-[0.3] cursor-not-allowed",
         ),
@@ -181,7 +181,7 @@ function EncounterPageContent() {
             <h1 className="text-2xl font-bold text-white tracking-tight italic">
               {sessionId ? "Prontuário Digital" : "Novo Atendimento"}
             </h1>
-            <p className="text-[10px] text-zinc-500 uppercase font-black tracking-[0.2em]">
+            <p className="text-xs text-zinc-500 uppercase font-black tracking-widest">
               {sessionId ? "Histórico de Evolução" : "Evolução Clínica"}
             </p>
           </div>
@@ -193,7 +193,7 @@ function EncounterPageContent() {
             variant="outline"
             onClick={() => setIsLocked(!isLocked)}
             className={cn(
-              "rounded-xl border-2 gap-2 font-bold uppercase tracking-widest text-[10px] h-12 px-4 transition-all",
+              "rounded-lg border-2 gap-2 font-bold uppercase tracking-widest text-xs h-12 px-4 transition-all",
               isLocked
                 ? "border-zinc-800 text-zinc-500 hover:bg-zinc-800"
                 : "border-secondary/50 text-secondary bg-secondary/5",
@@ -234,7 +234,7 @@ function EncounterPageContent() {
         >
           <div className="space-y-6 p-8 rounded-3xl border border-border/40 bg-card/50 shadow-sm">
             <div className="space-y-3">
-              <Label className="text-[11px] uppercase font-black text-muted-foreground tracking-widest italic text-secondary">
+              <Label className="text-xs uppercase font-black text-muted-foreground tracking-widest italic text-secondary">
                 Paciente Vinculado
               </Label>
               <PatientSelector
@@ -245,7 +245,7 @@ function EncounterPageContent() {
 
             <div className="space-y-4 border-t border-border/20 pt-6">
               <div className="space-y-2">
-                <Label className="text-[10px] uppercase font-bold text-muted-foreground flex items-center gap-2">
+                <Label className="text-xs uppercase font-bold text-muted-foreground flex items-center gap-2">
                   <ShieldCheck className="h-3.5 w-3.5 text-secondary" />{" "}
                   Convênio
                 </Label>
@@ -261,7 +261,7 @@ function EncounterPageContent() {
               </div>
 
               <div className="space-y-2">
-                <Label className="text-[10px] uppercase font-bold text-muted-foreground flex items-center gap-2">
+                <Label className="text-xs uppercase font-bold text-muted-foreground flex items-center gap-2">
                   <Clock8 className="h-3.5 w-3.5 text-secondary" /> Início (24h)
                 </Label>
                 <input
@@ -273,7 +273,7 @@ function EncounterPageContent() {
               </div>
 
               <div className="space-y-2">
-                <Label className="text-[10px] uppercase font-bold text-muted-foreground flex items-center gap-2">
+                <Label className="text-xs uppercase font-bold text-muted-foreground flex items-center gap-2">
                   <Timer className="h-3.5 w-3.5 text-secondary" /> Duração
                 </Label>
                 <Select value={duration} onValueChange={setDuration}>
@@ -289,7 +289,7 @@ function EncounterPageContent() {
               </div>
 
               <div className="p-4 rounded-2xl bg-secondary/5 border border-secondary/10 group transition-all">
-                <p className="text-[9px] uppercase font-black text-muted-foreground tracking-tighter">
+                <p className="text-sm uppercase font-black text-muted-foreground tracking-widest">
                   Previsão de Término
                 </p>
                 <p className="text-xl font-mono font-black text-secondary tracking-tighter">
@@ -298,7 +298,7 @@ function EncounterPageContent() {
               </div>
 
               <div className="space-y-2">
-                <Label className="text-[10px] uppercase font-bold text-muted-foreground flex items-center gap-2">
+                <Label className="text-xs uppercase font-bold text-muted-foreground flex items-center gap-2">
                   <Banknote className="h-3.5 w-3.5 text-secondary" /> Valor da
                   Sessão
                 </Label>
@@ -318,7 +318,7 @@ function EncounterPageContent() {
                     values.floatValue === undefined || values.floatValue <= 1000
                   }
                 />
-                <p className="text-[9px] text-muted-foreground italic leading-tight ml-1">
+                <p className="text-xs text-muted-foreground italic leading-tight ml-1">
                   Limite: R$ 1,00 a R$ 1.000,00
                 </p>
               </div>
@@ -327,7 +327,7 @@ function EncounterPageContent() {
 
           <div className="p-5 rounded-2xl bg-secondary/5 border border-secondary/10 flex gap-4 items-center">
             <CheckCircle2 className="h-5 w-5 text-secondary shrink-0" />
-            <span className="text-[10px] text-muted-foreground font-black uppercase tracking-wider">
+            <span className="text-xs text-muted-foreground font-black uppercase tracking-wider">
               Draft Auto-save
             </span>
           </div>

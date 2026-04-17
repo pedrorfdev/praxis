@@ -27,7 +27,7 @@ export function MainComplaint() {
           {...register("main_complaint.description")}
           disabled={isLocked}
           placeholder="Ex: Dificuldade na fala, seletividade alimentar, atraso motor..."
-          className="w-full min-h-[250px] bg-card border border-border rounded-lg p-8 text-foreground placeholder:text-muted-foreground outline-none focus:border-secondary/40 focus:shadow-md leading-relaxed antialiased"
+          className="w-full min-h-96 bg-card border border-border rounded-lg p-8 text-foreground placeholder:text-muted-foreground outline-none focus:border-secondary/40 focus:shadow-md leading-relaxed antialiased"
         />
       </div>
     </div>

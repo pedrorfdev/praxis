@@ -73,7 +73,7 @@ export function PatientForm({ initialData, isEditing, isLoading, onSubmit }: Pat
     <div className="space-y-8 mx-auto max-w-3xl">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="space-y-8 bg-card/40 border border-border/40 p-10 rounded-[2.5rem] shadow-2xl relative overflow-hidden"
+        className="space-y-8 bg-card/40 border border-border/40 p-10 rounded-xl shadow-2xl relative overflow-hidden"
       >
         <div className="absolute top-0 left-0 w-full h-1 bg-zinc-800">
           <div

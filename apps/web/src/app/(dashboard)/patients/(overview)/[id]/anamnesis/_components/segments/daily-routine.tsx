@@ -21,7 +21,7 @@ export function DailyRoutine() {
               {...register(`routine.${item.id}`)}
               disabled={isLocked}
               placeholder={item.placeholder}
-              className="w-full min-h-[80px] bg-card border border-border rounded-lg p-4 text-foreground outline-none focus:border-secondary/40 focus:shadow-md"
+              className="w-full min-h-20 bg-card border border-border rounded-lg p-4 text-foreground outline-none focus:border-secondary/40 focus:shadow-md"
             />
           </div>
         ))}

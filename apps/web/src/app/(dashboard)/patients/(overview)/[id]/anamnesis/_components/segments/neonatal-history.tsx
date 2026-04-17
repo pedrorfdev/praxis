@@ -23,15 +23,20 @@ export function NeonatalHistory() {
           <label className="text-xs font-black uppercase tracking-widest text-secondary/70 ml-1">
             Tipo de Parto
           </label>
-          <select
-            {...register("neonatal.delivery_type")}
-            disabled={isLocked}
-            className="w-full bg-card border border-border rounded-lg p-4 text-foreground outline-none focus:border-secondary/40 focus:shadow-md appearance-none"
-          >
-            <option value="vaginal" className="bg-[#0A0C10]">Normal / Vaginal</option>
-            <option value="cesarea" className="bg-[#0A0C10]">Cesárea</option>
-            <option value="forceps" className="bg-[#0A0C10]">Fórceps</option>
-          </select>
+          <div className="relative">
+            <select
+              {...register("neonatal.delivery_type")}
+              disabled={isLocked}
+              className="w-full bg-card border border-border rounded-lg p-4 pr-10 text-foreground outline-none focus:border-secondary/40 focus:shadow-md appearance-none"
+            >
+              <option value="vaginal">Normal / Vaginal</option>
+              <option value="cesarea">Cesárea</option>
+              <option value="forceps">Fórceps</option>
+            </select>
+            <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </div>
         </div>
 
         <div className="space-y-3">
@@ -64,29 +69,39 @@ export function NeonatalHistory() {
           <label className="text-xs font-black uppercase tracking-widest text-secondary/70 ml-1">
             Chorou ao nascer?
           </label>
-          <select
-            {...register("neonatal.cried_at_birth")}
-            disabled={isLocked}
-            className="w-full bg-card border border-border rounded-lg p-4 text-foreground outline-none focus:border-secondary/40 focus:shadow-md appearance-none"
-          >
-            <option value="sim" className="bg-[#0A0C10]">Sim</option>
-            <option value="nao" className="bg-[#0A0C10]">Não</option>
-            <option value="demorou" className="bg-[#0A0C10]">Demorou a chorar</option>
-          </select>
+          <div className="relative">
+            <select
+              {...register("neonatal.cried_at_birth")}
+              disabled={isLocked}
+              className="w-full bg-card border border-border rounded-lg p-4 pr-10 text-foreground outline-none focus:border-secondary/40 focus:shadow-md appearance-none"
+            >
+              <option value="sim">Sim</option>
+              <option value="nao">Não</option>
+              <option value="demorou">Demorou a chorar</option>
+            </select>
+            <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </div>
         </div>
 
         <div className="space-y-3">
           <label className="text-xs font-black uppercase tracking-widest text-secondary/70 ml-1">
             Precisou de UTI?
           </label>
-          <select
-            {...register("neonatal.icu_needed")}
-            disabled={isLocked}
-            className="w-full bg-card border border-border rounded-lg p-4 text-foreground outline-none focus:border-secondary/40 focus:shadow-md appearance-none"
-          >
-            <option value="nao" className="bg-[#0A0C10]">Não</option>
-            <option value="sim" className="bg-[#0A0C10]">Sim</option>
-          </select>
+          <div className="relative">
+            <select
+              {...register("neonatal.icu_needed")}
+              disabled={isLocked}
+              className="w-full bg-card border border-border rounded-lg p-4 pr-10 text-foreground outline-none focus:border-secondary/40 focus:shadow-md appearance-none"
+            >
+              <option value="nao">Não</option>
+              <option value="sim">Sim</option>
+            </select>
+            <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </div>
         </div>
 
         <div className="space-y-3">
@@ -110,7 +125,7 @@ export function NeonatalHistory() {
             {...register("neonatal.post_birth_complications")}
             disabled={isLocked}
             placeholder="Ex: Icterícia, fototerapia, dificuldade na amamentação..."
-            className="w-full min-h-[100px] bg-card border border-border rounded-lg p-6 text-foreground placeholder:text-muted-foreground outline-none focus:border-secondary/40 focus:shadow-md leading-relaxed"
+            className="w-full min-h-28 bg-card border border-border rounded-lg p-6 text-foreground placeholder:text-muted-foreground outline-none focus:border-secondary/40 focus:shadow-md leading-relaxed"
           />
         </div>
       </div>

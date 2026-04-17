@@ -16,13 +16,13 @@ export function PatientMiniHeader() {
           </div>
           <div>
             <h2 className="text-sm font-bold text-primary leading-none">João Silva</h2>
-            <p className="text-[10px] text-muted-foreground uppercase font-black tracking-widest mt-1">TEA • 6 anos</p>
+            <p className="text-xs text-muted-foreground uppercase font-black tracking-widest mt-1">TEA • 6 anos</p>
           </div>
         </div>
 
         <button 
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-secondary/5 transition-all text-[10px] font-black uppercase tracking-widest text-muted-foreground"
+          className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-secondary/5 transition-all text-xs font-black uppercase tracking-widest text-muted-foreground"
         >
           {isOpen ? "Recolher Info" : "Consultar Ficha"}
           <ChevronDown className={cn("h-4 w-4 transition-transform duration-300", isOpen && "rotate-180")} />
@@ -31,27 +31,27 @@ export function PatientMiniHeader() {
 
       <div className={cn(
         "overflow-hidden transition-all duration-500 ease-in-out bg-card/50",
-        isOpen ? "max-h-[200px] border-t border-border/20" : "max-h-0"
+        isOpen ? "max-h-48 border-t border-border/20" : "max-h-0"
       )}>
         <div className="max-w-7xl mx-auto p-6 grid grid-cols-3 gap-8">
            <div className="flex items-center gap-3">
              <User className="h-4 w-4 text-secondary" />
              <div>
-               <p className="text-[9px] text-muted-foreground uppercase font-black">Responsável</p>
+               <p className="text-xs text-muted-foreground uppercase font-black">Responsável</p>
                <p className="text-xs font-bold">Maria Silva (Mãe)</p>
              </div>
            </div>
            <div className="flex items-center gap-3">
              <Phone className="h-4 w-4 text-secondary" />
              <div>
-               <p className="text-[9px] text-muted-foreground uppercase font-black">Contato</p>
+               <p className="text-xs text-muted-foreground uppercase font-black">Contato</p>
                <p className="text-xs font-bold">(51) 99887-6655</p>
              </div>
            </div>
            <div className="flex items-center gap-3">
              <ClipboardList className="h-4 w-4 text-secondary" />
              <div>
-               <p className="text-[9px] text-muted-foreground uppercase font-black">CPF</p>
+               <p className="text-xs text-muted-foreground uppercase font-black">CPF</p>
                <p className="text-xs font-bold">123.456.789-00</p>
              </div>
            </div>

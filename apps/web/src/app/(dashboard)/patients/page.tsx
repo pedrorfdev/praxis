@@ -133,7 +133,7 @@ function PatientCard({ patient }: { patient: PatientSummary }) {
   return (
     <Card
       onClick={() => router.push(`/patients/${patient.id}`)}
-      className="group border border-border/40 bg-card/50 rounded-[2rem] shadow-sm hover:border-secondary/30 hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden relative"
+      className="group border border-border/40 bg-card/50 rounded-xl shadow-sm hover:border-secondary/30 hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden relative"
     >
       <div
         className="absolute top-4 right-2 z-10"
@@ -198,7 +198,7 @@ function PatientCard({ patient }: { patient: PatientSummary }) {
         </div>
         <Badge
           variant={patient.status === "Ativo" ? "secondary" : "outline"}
-          className="rounded-full text-[10px] uppercase tracking-wider py-1 px-3"
+          className="rounded-full text-xs uppercase tracking-wider py-1 px-3"
         >
           {patient.status}
         </Badge>
@@ -235,7 +235,7 @@ function PatientList({ patients }: { patients: PatientSummary[] }) {
             >
               <TableCell>
                 <div className="flex items-center gap-3">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-[10px] font-bold text-primary">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
                     {patient.fullName
                       .split(" ")
                       .map((n: string) => n[0])
@@ -245,7 +245,7 @@ function PatientList({ patients }: { patients: PatientSummary[] }) {
                     <span className="font-semibold text-sm">
                       {patient.fullName}
                     </span>
-                    <span className="text-[10px] text-muted-foreground italic">
+                    <span className="text-xs text-muted-foreground italic">
                       {patient.diagnosis}
                     </span>
                   </div>
@@ -254,7 +254,7 @@ function PatientList({ patients }: { patients: PatientSummary[] }) {
               <TableCell className="text-center">
                 <Badge
                   variant={patient.status === "Ativo" ? "secondary" : "outline"}
-                  className="text-[10px]"
+                  className="text-xs"
                 >
                   {patient.status}
                 </Badge>

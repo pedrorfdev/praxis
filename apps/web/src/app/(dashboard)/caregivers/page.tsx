@@ -117,7 +117,7 @@ function CaregiverCard({ caregiver }: { caregiver: any }) {
   return (
     <Card
       onClick={() => router.push(`/caregivers/${caregiver.id}`)}
-      className="group border border-border/40 bg-card/50 rounded-[2rem] shadow-sm hover:border-secondary/30 hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden relative"
+      className="group border border-border/40 bg-card/50 rounded-xl shadow-sm hover:border-secondary/30 hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden relative"
     >
       <div className="absolute top-4 right-4 z-10">
         <DropdownMenu>
@@ -161,7 +161,7 @@ function CaregiverCard({ caregiver }: { caregiver: any }) {
         </div>
         <Badge
           variant={caregiver.patientCount > 0 ? "secondary" : "outline"}
-          className="rounded-full text-[10px] uppercase tracking-wider py-1 px-3"
+          className="rounded-full text-xs uppercase tracking-wider py-1 px-3"
         >
           {caregiver.patientCount > 0 ? (
             <span className="inline-flex items-center gap-1">
@@ -197,7 +197,7 @@ function CaregiverList({ caregivers }: { caregivers: any[] }) {
             <TableRow key={c.id} className="group border-border/40 hover:bg-secondary/5 transition-colors cursor-pointer" onClick={() => router.push(`/caregivers/${c.id}`)}>
               <TableCell>
                 <div className="flex items-center gap-3">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary/10 text-[10px] font-bold text-secondary">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary/10 text-xs font-bold text-secondary">
                     {c.name.split(" ").map((n: string) => n[0]).join("")}
                   </div>
                   <span className="font-semibold text-sm">{c.name}</span>

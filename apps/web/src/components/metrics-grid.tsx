@@ -32,7 +32,7 @@ export function MetricsGrid() {
         <div
           key={metric.title}
           className={cn(
-            "relative overflow-hidden rounded-[2rem] border border-border/40 bg-card/50 p-6 transition-all hover:border-secondary/30",
+            "relative overflow-hidden rounded-xl border border-border/40 bg-card/50 p-6 transition-all hover:border-secondary/30",
             metric.className
           )}
         >

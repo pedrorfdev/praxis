@@ -20,7 +20,7 @@ export function TimelineHeader() {
         </div>
         <div>
           <h3 className="text-lg font-bold text-primary">Histórico de Evoluções</h3>
-          <p className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Prontuário Digital</p>
+          <p className="text-xs text-muted-foreground uppercase font-bold tracking-wider">Prontuário Digital</p>
         </div>
       </div>
       <Button 

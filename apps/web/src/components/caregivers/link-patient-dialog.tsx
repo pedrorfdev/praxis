@@ -44,7 +44,7 @@ export function LinkPatientDialog() {
           <UserPlus className="h-4 w-4" /> Vincular Paciente
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] bg-zinc-950 border-zinc-800 rounded-[2rem]">
+      <DialogContent className="sm:max-w-[425px] bg-zinc-950 border-zinc-800 rounded-xl">
         <DialogHeader>
           <DialogTitle className="text-2xl font-black text-white">Vincular Paciente</DialogTitle>
           <DialogDescription className="text-zinc-500 italic">
